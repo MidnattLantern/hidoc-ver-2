@@ -1,0 +1,23 @@
+.MainViewPosition {
+    min-height: 100%;
+}
+.MainViewContainer {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+
+    margin-bottom: 0px;
+}
+
+.NavBarPosition {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+.NavBarContainer {
+    margin: 10px;
+    border: 1px solid rgb(50, 50, 50);
+    background-color: rgb(30, 30, 30);
+    padding: 10px;
+    border-radius: 5px;
+}

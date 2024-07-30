@@ -1,0 +1,71 @@
+p {
+    margin: 0px;
+}
+
+.Button {
+    border: none;
+    background-color: rgb(255, 100, 125);
+    color: rgb(30, 30, 30);
+    font-weight: 700;
+    border-radius: 3px;
+    margin-top: 10px;
+    height: 40px;
+}
+.Button:hover {
+    color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 10px rgb(255, 100, 160);
+}
+.Button:active {
+    background-color: rgb(255, 100, 160);
+}
+
+.AuthenticationIsland {
+    border: 1px solid rgb(50, 50, 50);
+    background-color: rgb(30, 30, 30);
+    border-radius: 5px;
+    width: 500px;
+    align-items: center;
+    margin: auto;
+    margin-top: 10vh;
+    padding: 20px;
+}
+
+.SignUpDiv {
+    display: flex;
+}
+
+.SignUpParagraph {
+    padding-top: 8px;
+    padding-left: 10px;
+    margin-top: 10px;
+    height: 40px;
+}
+
+.Anchor {
+    text-decoration: underline;
+    color: rgb(255, 100, 125);
+}
+.Anchor:hover {
+    color: rgb(200, 200, 200)
+}
+
+.FormControl {
+    background-color: rgb(30, 30, 30);
+    color: rgb(200, 200, 200);
+    border-radius: 3px;
+    border: 2px solid rgb(50, 50, 50);
+}
+.FormControl:focus {
+    background-color: rgb(0, 0, 0);
+    color: rgb(200, 200, 200);
+    border: 2px solid rgb(255, 100, 125);
+    box-shadow: none;
+    border-radius: 3px;
+}
+.FormControl:hover {
+    border: 2px solid rgb(255, 100, 125);
+    box-shadow: 0px 0px 5px rgb(255, 100, 125);
+}
+.FormControl::placeholder {
+    color: rgb(200, 200, 200);
+}
