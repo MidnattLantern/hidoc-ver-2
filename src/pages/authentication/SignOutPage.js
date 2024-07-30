@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import styles from "../../styles/SignOutPage.module.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
-import { SetCurrentUserContext } from "../../App";
+import { useSetCurrentUser } from "../../contexts/currentUserContext";
 
 const SignOutPage = () => {
-    const setCurrentUser = useContext(SetCurrentUserContext);
+    const setCurrentUser = useSetCurrentUser();
 
     const history = useHistory();
 

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
-const HomePage = () => {
+export const ResponsiveWindowContext = createContext();
+export const useWindowDimension = () => useContext(ResponsiveWindowContext);
+export const ResponsiveWindowProvider = ({ children }) => {
     const [windowDimension, setWindowDimension] = useState("bigDesktop")
 
     useEffect(() => {
@@ -21,11 +23,8 @@ const HomePage = () => {
       }, []);
 
     return (
-        <div>
-            <h1>HiDoc</h1>
-            <p>windowDimension: {windowDimension}</p>
-        </div>
-    )
+        <ResponsiveWindowContext.Provider value={windowDimension}>
+            {children}
+        </ResponsiveWindowContext.Provider>
+    );
 };
-
-export default HomePage;
