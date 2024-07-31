@@ -1,11 +1,15 @@
-import React, { useState } from "react";
-import { Container, Form } from "react-bootstrap";
-import styles from "../../styles/SignInForm.module.css"
+import React, { useState, useContext } from "react";
+import { Form } from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useSetCurrentUser } from "../../contexts/currentUserContext";
+import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
+// Styles
+import Styles from "../../styles/AuthenticationForm.module.css";
+import "../../global.css";
 
 const SignInForm = () => {
+    const { windowDimension } = useContext(ResponsiveWindowContext);
     const setCurrentUser = useSetCurrentUser();
 
     const [signInData, setSignInData] = useState({
@@ -16,11 +20,8 @@ const SignInForm = () => {
         username,
         password,
     } = signInData;
-    // eslint-disable-next-line
-    const [ placeholder, setPlaceholder] = useState({
-        username: "",
-        password:"",
-    });
+
+    const [ errors, setErrors] = useState({}); // leave {} empty or there'll be errors
     const history = useHistory();
 
     const handleChange = (event) => {
@@ -36,57 +37,62 @@ const SignInForm = () => {
             const {data} = await axios.post("/dj-rest-auth/login/", signInData);
             setCurrentUser(data.user)
             history.push("/");
-        } catch(error) {
-            console.log("error: " + error);
+        } catch(err) {
+            setErrors(err.response?.data);
         }
-        setSignInData({
-            username: "",
-            password: "",
-        });
     };
 
     return (
-        <div>
-            <Container>
-                <Form className={styles.AuthenticationIsland} onSubmit={handleSubmit}>
+        <div className={`${Styles.AuthenticationContainer}`}>
+            <div className={`
+            ${errors.username || errors.password1 || errors.password2 ? Styles.ExtendContainerForErrorMessages : null }
+            ${windowDimension === "bigDesktop" ? Styles.ContainerForDesktop : Styles.ContainerForPhone}
+            `}>
+                <Form className={Styles.AuthenticationIsland} onSubmit={handleSubmit}>
                     <h1>Sign in</h1>
                     <br/>
 
                     <Form.Group>
                         <Form.Control
-                        className={styles.FormControl}
+                        className={Styles.FormControl}
                         name="username"
                         type="text"
-                        placeholder={"Username..." + placeholder.username}
+                        placeholder={"Username..."}
                         value={username}
                         onChange={handleChange}
                         />
                     </Form.Group>
+                    {errors.password?.map((message, idx) => (
+                        <p key={idx}>{message}</p>
+                    ))};
                     <br/>
 
                     <Form.Group>
                         <Form.Control
-                        className={styles.FormControl}
+                        className={Styles.FormControl}
                         name="password"
                         type="password"
-                        placeholder={"Password..." + placeholder.password}
+                        placeholder={"Password..."}
                         value={password}
                         onChange={handleChange}
                         />
                     </Form.Group>
-                    <hr/>
 
-                    <div className={styles.SignInDiv}>
-                        <button className={styles.Button}>
-                            Sign in
-                        </button>
-                        <p className={styles.SignInParagraph}>
-                            or <a href="signup" className={styles.Anchor}>Sign up</a>
+                    {errors.password?.map((message, idx) => (
+                        <p key={idx}>{message}</p>
+                    ))};
+                    <br/>
+
+                    <div className={Styles.AlignAuthentication}>
+                        {username !== "" && password !== "" ? // in english: button is invincible if the forms are empty
+                        <button className={Styles.AuthenticationButton}>Sign in</button> :
+                        <div className={Styles.AuthenticationButtonDisabled}>Sign in</div> }
+                        <p className={Styles.SignParagraph}>
+                            or <a href="signup" className={Styles.Anchor}>Sign up</a>
                         </p>
                     </div>
-
                 </Form>
-            </Container>
+            </div>
         </div>
     )
 };

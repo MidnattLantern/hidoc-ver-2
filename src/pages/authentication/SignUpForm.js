@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-import { Container, Form } from "react-bootstrap";
-import styles from "../../styles/SignUpForm.module.css"
+import React, { useState, useContext } from "react";
+import { Form } from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
+// styles
+import Styles from "../../styles/AuthenticationForm.module.css";
 
 const SignUpForm = () => {
+    const { windowDimension } = useContext(ResponsiveWindowContext);
 
     const [signUpData, setSignUpData] = useState({
         username: "",
@@ -18,13 +21,7 @@ const SignUpForm = () => {
         password2,
     } = signUpData;
 
-    // eslint-disable-next-line
-    const [errors, setErrors] = useState({
-        username: "",
-        password1: "",
-        password2: "",
-    });
-
+    const [errors, setErrors] = useState({}); // leave {} empty or there'll be errors
     const history = useHistory();
 
     const handleChange = (event) => {
@@ -39,71 +36,79 @@ const SignUpForm = () => {
         try {
             await axios.post('/dj-rest-auth/registration/', signUpData)
             history.push('/signin')
-            console.log("Redirected to /signin")
         } catch(err) {
-            console.log(err)
-        }
-        setSignUpData({
-            username: "",
-            password1: "",
-            password2: "",
-        });
+            setErrors(err.response?.data);
+        };
     }
 
     return (
-        <div>
-            <Container>
-                <Form className={styles.AuthenticationIsland} onSubmit={handleSubmit}>
-                    <h1>Sign up</h1>
+        <div className={`${Styles.AuthenticationContainer}`}>
+            <div className={`
+            ${errors.username || errors.password1 || errors.password2 ? Styles.ExtendContainerForErrorMessages : null }
+            ${windowDimension === "bigDesktop" ? Styles.ContainerForDesktop : Styles.ContainerForPhone}
+            `}>
+                <Form onSubmit={handleSubmit}>
+                    <h1 className={Styles.Header}>Sign up</h1>
                     <br/>
 
                     <Form.Group>
                         <Form.Control
-                        className={styles.FormControl}
+                        className={Styles.FormControl}
                         name="username"
                         type="text"
-                        placeholder={"Username..." + errors.username}
+                        placeholder={"Username..."}
                         value={username}
                         onChange={handleChange}
                         />
                     </Form.Group>
+                    {errors.username ? 
+                    errors.username?.map((message, idx) => (
+                        <p key={idx}>{message}</p>
+                    )): null}
                     <br/>
 
                     <Form.Group>
                         <Form.Control
-                        className={styles.FormControl}
+                        className={Styles.FormControl}
                         name="password1"
                         type="password"
-                        placeholder={"Password..." + errors.password1}
+                        placeholder={"Password..."}
                         value={password1}
                         onChange={handleChange}
                         />
                     </Form.Group>
+                    {errors.password1 ? 
+                    errors.password1?.map((message, idx) => (
+                        <p key={idx}>{message}</p>
+                    )): null}
                     <br/>
 
                     <Form.Group>
                         <Form.Control
-                        className={styles.FormControl}
+                        className={Styles.FormControl}
                         name="password2"
                         type="password"
-                        placeholder={"Confirm Password..." + errors.password2}
+                        placeholder={"Confirm Password..."}
                         value={password2}
                         onChange={handleChange}
                         />
                     </Form.Group>
-                    <hr/>
+                    {errors.password2 ? 
+                    errors.password2?.map((message, idx) => (
+                        <p key={idx}>{message}</p>
+                    )): null}
+                    <br/>
 
-                    <div className={styles.SignUpDiv}>
-                        <button className={styles.Button}>
-                            Sign up
-                        </button>
-                        <p className={styles.SignUpParagraph}>
-                            or <a href="signin" className={styles.Anchor}>Sign in</a>
+                    <div className={Styles.AlignAuthentication}>
+                        {username !== "" && password1 !== ""  && password2 !== "" ? // in english: button is invincible if the forms are empty
+                        <button className={Styles.AuthenticationButton}>Sign up</button> :
+                        <div className={Styles.AuthenticationButtonDisabled}>Sign up</div> }
+                        <p className={Styles.SignParagraph}>
+                            or <a href="signin" className={Styles.Anchor}>Sign in</a>
                         </p>
                     </div>
-
                 </Form>
-            </Container>
+            </div>
         </div>
     )
 };

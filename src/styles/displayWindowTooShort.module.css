@@ -12,7 +12,7 @@
     color: var(--theme);
 }
 .Message{
-    color: rgba(200,200,240,0.4);
+    color: var(--grey);
 }
 .CenterContent { /* because justify-content is set to "end", this class recover the centered position */
     margin-top: auto;

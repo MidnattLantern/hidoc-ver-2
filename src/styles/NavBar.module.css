@@ -87,3 +87,6 @@
     cursor: default;
     box-shadow: none;
 }
+.Active:hover { /* Override so that pulse don't apply here */
+    animation: none;
+}
