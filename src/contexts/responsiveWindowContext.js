@@ -4,6 +4,7 @@ export const ResponsiveWindowContext = createContext();
 export const useWindowDimension = () => useContext(ResponsiveWindowContext);
 export const ResponsiveWindowProvider = ({ children }) => {
     const [windowDimension, setWindowDimension] = useState("bigDesktop")
+    const [windowTooShort, setWindowTooShort] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -14,6 +15,11 @@ export const ResponsiveWindowProvider = ({ children }) => {
             } else if (window.innerWidth < 475) {
               setWindowDimension("phone");
             }
+            if (window.innerHeight < 350) {
+              setWindowTooShort(true)
+            } else if (window.innerHeight >= 350) {
+              setWindowTooShort(false)
+            }
           };
         window.addEventListener('resize', handleResize);
         handleResize();
@@ -23,8 +29,16 @@ export const ResponsiveWindowProvider = ({ children }) => {
       }, []);
 
     return (
-        <ResponsiveWindowContext.Provider value={windowDimension}>
+        <ResponsiveWindowContext.Provider value={{windowDimension, windowTooShort}}>
             {children}
         </ResponsiveWindowContext.Provider>
     );
 };
+
+/* strings:
+
+  bigDesktop
+  smallDesktop
+  phone
+
+*/

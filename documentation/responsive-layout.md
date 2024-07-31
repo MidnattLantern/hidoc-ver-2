@@ -10,7 +10,7 @@ src > contexts > responsiveWindowContext.js
 
 This context checks the width of the browser window and returns a string depending on the width.
 
-The `App.js` file is already wrapped by this provider, so any component that needs this feature can import the provider directly.
+The `index.js` file is already wrapped by this provider, so any component that needs this feature can import the provider directly.
 
 **To "consume" the provider:**
 

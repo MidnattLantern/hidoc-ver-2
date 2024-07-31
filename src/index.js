@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from 'react-router-dom';
 import { CurrentUserProvider } from './contexts/currentUserContext';
+import { ResponsiveWindowProvider } from "./contexts/responsiveWindowContext";
 
 ReactDOM.render(
-<React.StrictMode>
+  <React.StrictMode>
     <Router>
       <CurrentUserProvider>
-        <App />
+        <ResponsiveWindowProvider>
+          <App />
+        </ResponsiveWindowProvider>
       </CurrentUserProvider>
     </Router>
   </React.StrictMode>,
