@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ResponsiveWindowContext } from "../contexts/responsiveWindowContext";
+import { useCurrentUser } from "../contexts/currentUserContext";
 // Styles
 import Styles from '../styles/NavBar.module.css';
 import "../global.css";
 
 const NavBar = () => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
+    const currentUser = useCurrentUser();
 
     const nonAuthenticatedOptions = <>
         <NavLink className={`
@@ -26,6 +28,18 @@ const NavBar = () => {
     </>
 
     const authenticatedOptions = <>
+
+        <NavLink className={`
+        ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
+        `} exact activeClassName={Styles.Active} to={`/artist-page/${currentUser?.artaccount_id}`}>
+            My Projects
+        </NavLink>
+
+        <NavLink className={`
+        ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
+        `} exact activeClassName={Styles.Active} to={`/watch-list/`}>
+            Watch List
+        </NavLink>
 
         <NavLink className={`
         ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
@@ -49,8 +63,7 @@ const NavBar = () => {
                 Home
             </NavLink>
 
-            {nonAuthenticatedOptions}
-            {authenticatedOptions}
+            {currentUser ? authenticatedOptions : nonAuthenticatedOptions}
         </div>
         </> )
 };

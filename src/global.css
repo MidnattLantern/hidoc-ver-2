@@ -1,9 +1,9 @@
 :root {
     --theme: rgb(255, 85, 105);
-    --void: rgb(7,7,8);
-    --void-transparent: rgba(7,7,8,0.4);
-    --void-shade: rgb(17,15,17);
-    --void-shade-transparent: rgba(17,15,17,0.4);
-    --edge: rgb(23,20,23);
+    --void: rgb(25,24,26);
+    --void-transparent: rgba(25,24,26),0.4;
+    --void-shade: rgb(12,11,13);
+    --void-shade-transparent: rgba(12,11,13,0.4);
+    --edge: rgb(35,34,36);
     --white: rgb(210,200,200);
 }
