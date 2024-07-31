@@ -14,14 +14,14 @@ const NavBar = () => {
         <NavLink className={`
         ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
         `}
-        exact activeClassName={Styles.Active} to="/signin">
+        exact activeClassName={Styles.Active} to="/signin/">
             Sign in
         </NavLink>
 
         <NavLink className={`
         ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
         `}
-        exact activeClassName={Styles.Active} to="/signup">
+        exact activeClassName={Styles.Active} to="/signup/">
             Sign up
         </NavLink>
 
@@ -43,7 +43,7 @@ const NavBar = () => {
 
         <NavLink className={`
         ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
-        `} exact activeClassName={Styles.Active} to="/signout">
+        `} exact activeClassName={Styles.Active} to="/signout/">
             Sign out
         </NavLink>
 
@@ -61,6 +61,13 @@ const NavBar = () => {
             `}
             exact activeClassName={Styles.Active} to="/">
                 Home
+            </NavLink>
+
+            <NavLink className={`
+            ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
+            `}
+            exact activeClassName={Styles.Active} to="/project/browse/">
+                Browse
             </NavLink>
 
             {currentUser ? authenticatedOptions : nonAuthenticatedOptions}

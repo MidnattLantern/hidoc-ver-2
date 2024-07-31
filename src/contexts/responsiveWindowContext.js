@@ -10,9 +10,9 @@ export const ResponsiveWindowProvider = ({ children }) => {
         const handleResize = () => {
             if (window.innerWidth >= 1220) {
               setWindowDimension("bigDesktop");
-            } else if (window.innerWidth >= 475 && window.innerWidth < 1220) {
+            } else if (window.innerWidth >= 525 && window.innerWidth < 1220) {
               setWindowDimension("smallDesktop");
-            } else if (window.innerWidth < 475) {
+            } else if (window.innerWidth < 525) {
               setWindowDimension("phone");
             }
             if (window.innerHeight < 350) {

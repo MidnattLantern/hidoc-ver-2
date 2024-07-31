@@ -42,6 +42,11 @@ const SignInForm = () => {
         }
     };
 
+    const handleMoveToSignUp = (event) => { // applying the logic directly to the onClick cause errors
+        event.preventDefault();
+        history.push("/signup/");
+    }
+
     return (
         <div className={`${Styles.AuthenticationContainer}`}>
             <div className={`
@@ -88,7 +93,7 @@ const SignInForm = () => {
                         <button className={Styles.AuthenticationButton}>Sign in</button> :
                         <div className={Styles.AuthenticationButtonDisabled}>Sign in</div> }
                         <p className={Styles.SignParagraph}>
-                            or <a href="signup" className={Styles.Anchor}>Sign up</a>
+                            or <a onClick={handleMoveToSignUp} className={Styles.Anchor}>Sign up</a>
                         </p>
                     </div>
                 </Form>
