@@ -15,7 +15,7 @@ p, h1 {
 
 .a {
   text-decoration: underline;
-  color: rgb(255, 100, 125);
+  color: rgb(255, 85, 105); /* same as --theme */
 }
 
 code {

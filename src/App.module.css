@@ -1,6 +1,31 @@
 .AppContainer{
-    background-image: linear-gradient(to bottom, rgb(18,15,18) ,rgb(7,7,8));
+    background-image: linear-gradient(to bottom, rgb(17,15,17) ,rgb(7,7,8));
     height: 100vh;
     overflow-x: hidden;
     overflow-y: hidden;
+}
+.AlignForPhone{ /* NavBar at bottom */
+    display: flex;
+    flex-direction: column-reverse;
+}
+.AlignForDesktop{ /* NavBar to the side*/
+    display: flex;
+    flex-direction: row;
+}
+.MainViewContainer{
+    flex-grow: 1; /* fills the rest of the page so that NavBar can be fixed */
+    padding: 10px;
+}
+.NavBarContainer{
+    padding: 10px;
+}
+.NavBarForPhone{
+    width: 100%;
+    height: 75px;
+    padding-top: 0px; /* exception case to keep the padding consistent */
+}
+.NavBarForDesktop{
+    width: 150px;
+    height: 100%;
+    padding-right: 0px; /* exception case to keep the padding consistent */
 }

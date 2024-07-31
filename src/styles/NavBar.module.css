@@ -1,27 +1,55 @@
+.NavBarContainer{
+    background-color: var(--void-transparent);
+    border: 2px solid var(--edge);
+    border-radius: 3px;
+    width: auto;
+    height: 100%;
+}
+.AlignForPhone{
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding-left: 40px;
+}
+.AlignForDesktop{
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.Logo{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--theme);
+}
 .NavBarButton {
-    width: 100px;
-    padding: 10px;
-    background-color: rgb(0, 0, 0);
-    border-radius: 5px;
-    margin: 5px;
+    border: 2px solid var(--edge);
+    padding: 7px;
+    margin: 7px;
     text-align: center;
-    color: rgb(200, 200, 200);
     text-decoration: none;
-    border: 2px solid rgb(0, 0, 0);
+    color: var(--white);
+}
+.ButtonForPhone{
+    min-width: 100px;
+    height: auto;
+    margin-left: 0px;
+}
+.ButtonForDesktop{
+    width: auto;
+    margin-bottom: 0px;
 }
 .NavBarButton:hover {
-    color: rgb(255, 100, 125);
+    color: var(--theme);
 }
 
 .Active {
-    background-color: rgb(30, 30, 30);
-    border: 2px solid rgb(0, 0, 0);
-}
-
-.NavBarContainer {
-    margin: 10px;
-    border: 1px solid rgb(50, 50, 50);
-    background-color: rgb(30, 30, 30);
-    padding: 10px;
-    border-radius: 5px;
+    color: var(--theme);
+    border: 2px solid rgba(0,0,0,0);
+    cursor: default;
 }

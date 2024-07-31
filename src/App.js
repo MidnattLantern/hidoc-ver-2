@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styles from "./App.module.css";
+import Styles from "./App.module.css";
 import NavBar from './components/NavBar';
 import {Route, Switch} from 'react-router-dom';
 import './api/axiosDefaults';
@@ -13,12 +13,24 @@ import { ResponsiveWindowContext } from "./contexts/responsiveWindowContext";
 
 
 function App() {
-  const { windowTooShort } = useContext(ResponsiveWindowContext);
+  const { windowDimension, windowTooShort } = useContext(ResponsiveWindowContext);
 
   return (
-      <div className={styles.AppContainer}>
+      <div className={`
+      ${Styles.AppContainer}
+      ${windowDimension === "phone" ? Styles.AlignForPhone : Styles.AlignForDesktop}
+      `}>
+
         {windowTooShort ? <DisplayWindowTooShort /> : <>
-          <Switch>
+
+          <div className={`
+          ${Styles.NavBarContainer}
+          ${windowDimension === "phone" ? Styles.NavBarForPhone: Styles.NavBarForDesktop}
+            `}>
+              <NavBar/>
+          </div>
+          <div className={Styles.MainViewContainer}>
+            <Switch>
               <Route exact path="/signin" render={() => <SignInForm /> } />
               <Route exact path="/signup" render={() => <SignUpForm />} />
               <Route exact path="/signout" render={() => <SignOutPage />} />
@@ -26,11 +38,9 @@ function App() {
               <Route exact path="/" render={() => <HomePage />} />
               <Route path="/" render={() => <h1>Page not found</h1>} />
             </Switch>
-        <div>
-            <NavBar/>
-        </div>        
-        </>}
+          </div>
 
+        </>}
       </div>
   )
 };

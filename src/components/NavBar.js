@@ -1,28 +1,57 @@
-import React from "react";
-import Nav from 'react-bootstrap/Nav';
-import styles from '../styles/NavBar.module.css'
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { useCurrentUser } from "../contexts/currentUserContext";
+import { ResponsiveWindowContext } from "../contexts/responsiveWindowContext";
+// Styles
+import Styles from '../styles/NavBar.module.css';
+import "../global.css";
 
 const NavBar = () => {
-const currentUser = useCurrentUser();
+    const { windowDimension } = useContext(ResponsiveWindowContext);
 
     const nonAuthenticatedOptions = <>
-        <NavLink className={styles.NavBarButton} exact activeClassName={styles.Active} to="/signin">Sign in</NavLink>
-        <NavLink className={styles.NavBarButton} exact activeClassName={styles.Active} to="/signup">Sign up</NavLink>
+        <NavLink className={`
+        ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
+        `}
+        exact activeClassName={Styles.Active} to="/signin">
+            Sign in
+        </NavLink>
+
+        <NavLink className={`
+        ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
+        `}
+        exact activeClassName={Styles.Active} to="/signup">
+            Sign up
+        </NavLink>
+
     </>
 
     const authenticatedOptions = <>
-        <NavLink className={styles.NavBarButton} exact activeClassName={styles.Active} to="/signout">Sign out</NavLink>
+
+        <NavLink className={`
+        ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
+        `} exact activeClassName={Styles.Active} to="/signout">
+            Sign out
+        </NavLink>
+
     </>
 
     return ( <>
-        <Nav>
-            <NavLink className={styles.NavBarButton} exact activeClassName={styles.Active} to="/"><i className="fas fa-home" /> Home</NavLink>
+        <div className={`
+            ${Styles.NavBarContainer}
+            ${ windowDimension === "phone" ? Styles.AlignForPhone : Styles.AlignForDesktop}
+            `}>
+            {windowDimension === "phone" ? null : <h1 className={Styles.Logo}>HiDoc</h1>}
+
+            <NavLink className={`
+            ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
+            `}
+            exact activeClassName={Styles.Active} to="/">
+                Home
+            </NavLink>
+
             {nonAuthenticatedOptions}
             {authenticatedOptions}
-            <p>user: {currentUser?.username}</p>
-        </Nav>
+        </div>
         </> )
 };
 
