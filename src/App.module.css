@@ -1,5 +1,5 @@
 .AppContainer{
-    background-image: linear-gradient(to bottom, rgb(25,24,26) ,rgb(12,11,13));
+    background-image: linear-gradient(to bottom, var(--void) ,var(--void-shade));
     height: 100vh;
     overflow-x: hidden;
     overflow-y: hidden;

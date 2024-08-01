@@ -16,28 +16,11 @@
     padding: 0px;
     transition: width 0.5s ease-out;
 }
-.AnimateOpeningLogo{
-    position: absolute;
-    z-index: 2;
-    opacity: 1;
-    display: flex;
-    justify-content: center;
-    font-size: 75px;
-    color: var(--theme);
-    background-color: var(--void);
-    padding: 10px;
-    transition: opacity 0.50s ease-in;
-    top: -50px;
-    width: 100%;
-}
 .AnimateOpening.Expand{
     width: 100%;
     height: 100%;
     transition: width 0.5s ease-out, height 0.5s ease-out;
     padding: 0px;
-}
-.AnimateOpeningLogo.FadeOut{
-    opacity: 0.0;
 }
 .AnimateOpeningLoader{
     display: flex;

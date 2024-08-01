@@ -61,10 +61,6 @@ const ProjectList = ({ message, filter = "" }) => {
                     </>
                 ) : null}
             </div>
-
-        <div className={`${Styles.AnimateOpeningLogo} ${animateOpening ? Styles.FadeOut : null}`}>
-            HiDoc
-        </div>
         {hasLoaded ? null : <div className={Styles.AnimateOpeningLoader}>
             <p>Loading...</p>
         </div>}

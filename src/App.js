@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Styles from "./App.module.css";
 import NavBar from './components/NavBar';
 import {Route, Switch} from 'react-router-dom';
 import './api/axiosDefaults';
@@ -11,7 +10,11 @@ import HomePage from "./pages/home_page/HomePage";
 import DisplayWindowTooShort from "./pages/diverse/displayWindowTooShort";
 import './api/axiosDefaults';
 import { ResponsiveWindowContext } from "./contexts/responsiveWindowContext";
-
+// styles
+import Styles from "./App.module.css";
+import "./global.css";
+// components
+import PilotPage from "./pages/pilot/PilotPage";
 
 function App() {
   const { windowDimension, windowTooShort } = useContext(ResponsiveWindowContext);
@@ -37,6 +40,8 @@ function App() {
               <Route exact path="/signout" render={() => <SignOutPage />} />
 
               <Route exact path="/project/browse" render={() => <ProjectPage />} />
+
+              <Route exact path="/pilot" render={() => <PilotPage /> } />
 
               <Route exact path="/" render={() => <HomePage />} />
               <Route path="/" render={() => <h1>Page not found</h1>} />
