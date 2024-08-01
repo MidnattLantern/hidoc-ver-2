@@ -6,10 +6,9 @@ import { useCurrentUser } from "../../../contexts/currentUserContext";
 // styles
 import Styles from "../../../styles/ProjectList.module.css";
 import "../../../global.css";
+import AnimatedContainer from "../../../components/AnimatedContainer";
 
 const ProjectList = ({ message, filter = "" }) => {
-    // animation
-    const [animateOpening, setAnimateOpening] = useState(false);
 
     const [projects, setProjects] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -18,7 +17,6 @@ const ProjectList = ({ message, filter = "" }) => {
     const currentUser = useCurrentUser();
 
     useEffect(() => {
-        setAnimateOpening(true);
         const fetchProjects = async () => {
             try {
                 const { data } = await axiosReq.get(`/projects/?${filter}search=${query}`);
@@ -34,7 +32,7 @@ const ProjectList = ({ message, filter = "" }) => {
         setHasLoaded(false);
         const timer = setTimeout(() => {
             fetchProjects();
-        }, 2000);
+        }, 0);
         return () => {
             clearTimeout(timer);
         };
@@ -42,30 +40,24 @@ const ProjectList = ({ message, filter = "" }) => {
 
     return(<>
         <div className={Styles.ProjectListContainer}>
-            <div className={`${Styles.AnimateOpening} ${animateOpening ? Styles.Expand : ''}`}>
-                {hasLoaded ? (
-                    <>
-                        {projects?.results?.length ? (
-                            <InfiniteScroll
-                                children={
-                                    projects.results.map((post) => (
-                                        <p>item: {post.id}</p>
-                                    ))
-                                }
-                                dataLength={projects.results.length}
-                                loader={"Loading..."}
-                                hasMore={!!projects.results.next}
-                                next={() => fetchMoreData(projects, setProjects)}
-                            />
-                        ) : null}
-                    </>
-                ) : null}
-            </div>
-        {hasLoaded ? null : <div className={Styles.AnimateOpeningLoader}>
-            <p>Loading...</p>
-        </div>}
-    </div>
-
+            {hasLoaded ? (
+                <>
+                    {projects?.results?.length ? (
+                        <InfiniteScroll
+                            children={
+                                projects.results.map((post) => (
+                                    <p>item: {post.id}</p>
+                                ))
+                            }
+                            dataLength={projects.results.length}
+                            loader={"Loading..."}
+                            hasMore={!!projects.results.next}
+                            next={() => fetchMoreData(projects, setProjects)}
+                        />
+                    ) : null}
+                </>
+            ) : null}
+        </div>
     </>)
 };
 

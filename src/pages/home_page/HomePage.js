@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { ResponsiveWindowContext } from '../../contexts/responsiveWindowContext';
 import { useCurrentUser } from '../../contexts/currentUserContext';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import AnimatedContainer from "../../components/AnimatedContainer";
 
 const HomePage = () => {
     const currentUser = useCurrentUser();
@@ -14,12 +15,12 @@ const HomePage = () => {
     }
 
     return (
-        <div>
+        <AnimatedContainer>
             <h1>Home</h1>
             <p>windowDimension: {windowDimension}</p>
             <p>user: {currentUser?.username}</p>
             <button onClick={handleMoveToBrowse}>Browse</button>
-        </div>
+        </AnimatedContainer>
     )
 };
 

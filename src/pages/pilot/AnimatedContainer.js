@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 // styles
-import Styles from "../../styles/PilotPage.module.css";
+import Styles from "../../styles/AnimatedContainer.module.css";
 import "../../global.css";
 
-const PilotPage = () => {
+const AnimatedContainer = () => {
     const [expandedWidth, setExpandedWidth] = useState(false);
     const [expandedHeight, setExpandedHeight] = useState(false);
     const [displayLoader, setDisplayLoader] = useState(false)
@@ -19,7 +19,7 @@ const PilotPage = () => {
         }, 5500);
     }, []);
 
-    return (<div className={`${Styles.PilotPageContainer}`}>
+    return (<div className={`${Styles.AnimatedContainerContainer}`}>
                 <div className={`${Styles.LauncherBox} ${expandedHeight ? Styles.LauncherBoxFadeOut : null}`}>
                     {displayLoader ? <p className={Styles.LoaderP}>loading...</p> : null}
                 </div>
@@ -34,15 +34,11 @@ const PilotPage = () => {
                     `}
                 >
                 {expandedHeight ? <div>
-                    <p>content 1</p>
-                    <p>content 2</p>
-                    <p>content 3</p>
-                    <p>content 4</p>
-                    <p>content 5</p>
+                    {/* Any element will go here */}
                 </div> : null}
             </div>
 
     </div>)
 };
 
-export default PilotPage;
+export default AnimatedContainer;

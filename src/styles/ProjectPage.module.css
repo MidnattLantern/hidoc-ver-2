@@ -1,11 +1,8 @@
 /* Foundation */
 .ProjectPageContainer {
-    border: 2px solid var(--edge);
-    border-radius: 3px;
     height: 100%;
     display: flex;
     justify-content: center;
-    background-color: var(--void);
 }
 
 .ContainerForPhone {
@@ -21,5 +18,4 @@
     height: 100%;
     width: 1030px;
     transition: width 0.5s ease, height 0.5s ease;
-    padding: 20px;
 }

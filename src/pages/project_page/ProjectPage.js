@@ -5,6 +5,7 @@ import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
 // components
 import ProjectList from "./crud/ProjectList";
+import AnimatedContainer from "../../components/AnimatedContainer";
 
 const ProjectPage = () => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
@@ -24,7 +25,9 @@ const ProjectPage = () => {
     return(<>
         <div className={Styles.ProjectPageContainer}>
             <div className={getClassName()}>
-                <ProjectList />
+                <AnimatedContainer>
+                    <ProjectList />
+                </AnimatedContainer>
             </div>
         </div>
     </>)
