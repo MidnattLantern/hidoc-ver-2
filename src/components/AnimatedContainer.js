@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Styles from "../styles/AnimatedContainer.module.css";
 import "../global.css";
 
-const AnimatedContainer = ({ children }) => {
+const AnimatedContainer = ({ hasLoaded, children }) => {
     const [expandedWidth, setExpandedWidth] = useState(false);
     const [expandedHeight, setExpandedHeight] = useState(false);
     const [displayLoader, setDisplayLoader] = useState(false);
@@ -11,11 +11,12 @@ const AnimatedContainer = ({ children }) => {
         setExpandedWidth(true);
         setTimeout(() => {
             setDisplayLoader(true);
-        }, 500); // as long as it takes for the logo to fade out
-        setTimeout(() => { // Adding artificial delay
+        }, 500); // As long as it takes for the logo to fade out
+        setTimeout(() => {
+            /* external try-catch block would go here */
             setExpandedHeight(true);
             setDisplayLoader(false);
-        }, 500);
+        }, 500); // Artificial delay for catching up
     }, []);
 
     return (
@@ -30,10 +31,10 @@ const AnimatedContainer = ({ children }) => {
                 className={`
                     ${Styles.ExpandingDiv}
                     ${expandedWidth ? Styles.ExpandingDivExpandedWidth : null}
-                    ${expandedHeight ? Styles.ExpandingDivExpandedHeight : null}
+                    ${expandedHeight && hasLoaded ? Styles.ExpandingDivExpandedHeight : null}
                 `}
             >
-                {expandedHeight ? <div>{children}</div> : null}
+                {expandedHeight && hasLoaded ? <div>{children}</div> : null}
             </div>
         </div>
     );

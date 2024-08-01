@@ -5,9 +5,8 @@ import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
 // components
 import ProjectList from "./crud/ProjectList";
-import AnimatedContainer from "../../components/AnimatedContainer";
 
-const ProjectPage = () => {
+const ProjectPage = ({ hasLoaded }) => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const getClassName = () => {
         switch (windowDimension) { // you can switch-case css classes like this
@@ -25,9 +24,7 @@ const ProjectPage = () => {
     return(<>
         <div className={Styles.ProjectPageContainer}>
             <div className={getClassName()}>
-                <AnimatedContainer>
-                    <ProjectList />
-                </AnimatedContainer>
+                <ProjectList />
             </div>
         </div>
     </>)

@@ -1,0 +1,1 @@
+The AnimatedContainer component apply an 'apetiser' that makes opening pages more fun and engaging while fetching data

@@ -17,13 +17,11 @@ const ProjectList = ({ message, filter = "" }) => {
     const currentUser = useCurrentUser();
 
     useEffect(() => {
-        const fetchProjects = async () => {
+        const fetchProjects = async () => { // "extra logic"
             try {
                 const { data } = await axiosReq.get(`/projects/?${filter}search=${query}`);
                 setProjects(data);
-                setTimeout(() => { // Adding artificial delay
-                    setHasLoaded(true);
-                }, 0); // delay in miliseconds
+                setHasLoaded(true);
             } catch (err) {
 
             }
@@ -39,25 +37,27 @@ const ProjectList = ({ message, filter = "" }) => {
     }, [filter, query, currentUser]);
 
     return(<>
-        <div className={Styles.ProjectListContainer}>
-            {hasLoaded ? (
-                <>
-                    {projects?.results?.length ? (
-                        <InfiniteScroll
-                            children={
-                                projects.results.map((post) => (
-                                    <p>item: {post.id}</p>
-                                ))
-                            }
-                            dataLength={projects.results.length}
-                            loader={"Loading..."}
-                            hasMore={!!projects.results.next}
-                            next={() => fetchMoreData(projects, setProjects)}
-                        />
-                    ) : null}
-                </>
-            ) : null}
-        </div>
+        <AnimatedContainer hasLoaded={hasLoaded}>
+            <div className={Styles.ProjectListContainer}>
+                {hasLoaded ? (
+                    <>
+                        {projects?.results?.length ? (
+                            <InfiniteScroll
+                                children={
+                                    projects.results.map((post) => (
+                                        <p>item: {post.id}</p>
+                                    ))
+                                }
+                                dataLength={projects.results.length}
+                                loader={"Loading..."}
+                                hasMore={!!projects.results.next}
+                                next={() => fetchMoreData(projects, setProjects)}
+                            />
+                        ) : null}
+                    </>
+                ) : null}
+            </div>
+        </AnimatedContainer>
     </>)
 };
 
