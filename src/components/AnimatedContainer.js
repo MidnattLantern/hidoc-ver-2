@@ -8,20 +8,35 @@ const AnimatedContainer = ({ hasLoaded, children }) => {
     const [displayLoader, setDisplayLoader] = useState(false);
 
     useEffect(() => {
+        // Set the expandedWidth state immediately
         setExpandedWidth(true);
-        setTimeout(() => {
+
+        // Start the loader timeout
+        const loaderTimeout = setTimeout(() => {
             setDisplayLoader(true);
-        }, 500); // As long as it takes for the logo to fade out
-        setTimeout(() => {
-            /* external try-catch block would go here */
-            setExpandedHeight(true);
-            setDisplayLoader(false);
-        }, 500); // Artificial delay for catching up
-    }, []);
+        }, 500); // This simulates a delay for the logo to fade out
+
+        // Conditionally start the expandedHeight timeout based on hasLoaded
+        const heightTimeout = hasLoaded ? setTimeout(() => {
+            try {
+                setExpandedHeight(true);
+                setDisplayLoader(false);
+            } catch (error) {
+                console.error('Error in expanding height:', error);
+            }
+        }, 500) : null;
+        return () => { // Cleanup function to clear timeouts when the component unmounts or dependencies change
+            clearTimeout(loaderTimeout);
+            if (heightTimeout) {
+                clearTimeout(heightTimeout);
+            }
+        };
+    }, [hasLoaded]); // Dependency array includes hasLoaded to re-run effect when it changes
+
 
     return (
         <div className={Styles.AnimatedContainerContainer}>
-            <div className={`${Styles.LauncherBox} ${expandedHeight ? Styles.LauncherBoxFadeOut : null}`}>
+            <div className={`${Styles.LauncherBox} ${expandedHeight && hasLoaded ? Styles.LauncherBoxFadeOut : null}`}>
                 {displayLoader ? <p className={Styles.LoaderP}>loading...</p> : null}
             </div>
             <div className={`${Styles.LauncherLogo} ${expandedWidth ? Styles.LauncherLogoFadeOut : null}`}>

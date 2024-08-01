@@ -14,7 +14,6 @@ import { ResponsiveWindowContext } from "./contexts/responsiveWindowContext";
 import Styles from "./App.module.css";
 import "./global.css";
 // components
-import AnimatedContainer from "./pages/pilot/AnimatedContainer";
 
 function App() {
   const { windowDimension, windowTooShort } = useContext(ResponsiveWindowContext);
@@ -40,8 +39,6 @@ function App() {
               <Route exact path="/signout" render={() => <SignOutPage />} />
 
               <Route exact path="/project/browse" render={() => <ProjectPage />} />
-
-              <Route exact path="/pilot" render={() => <AnimatedContainer /> } />
 
               <Route exact path="/" render={() => <HomePage />} />
               <Route path="/" render={() => <h1>Page not found</h1>} />
