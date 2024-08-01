@@ -8,17 +8,24 @@ import Styles from "../../../styles/ProjectList.module.css";
 import "../../../global.css";
 
 const ProjectList = ({ message, filter = "" }) => {
+    // animation
+    const [animateOpening, setAnimateOpening] = useState(false);
+
     const [projects, setProjects] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
+    // eslint-disable-next-line
     const [query, setQuery] = useState("");
     const currentUser = useCurrentUser();
 
     useEffect(() => {
+        setAnimateOpening(true);
         const fetchProjects = async () => {
             try {
                 const { data } = await axiosReq.get(`/projects/?${filter}search=${query}`);
                 setProjects(data);
-                setHasLoaded(true);
+                setTimeout(() => { // Adding artificial delay
+                    setHasLoaded(true);
+                }, 0); // delay in miliseconds
             } catch (err) {
 
             }
@@ -35,14 +42,14 @@ const ProjectList = ({ message, filter = "" }) => {
 
     return(<>
         <div className={Styles.ProjectListContainer}>
-
-        {hasLoaded ? (
+            <div className={`${Styles.AnimateOpening} ${animateOpening ? Styles.Expand : ''}`}>
+                {hasLoaded ? (
                     <>
                         {projects?.results?.length ? (
                             <InfiniteScroll
                                 children={
                                     projects.results.map((post) => (
-                                        <p>item</p>
+                                        <p>item: {post.id}</p>
                                     ))
                                 }
                                 dataLength={projects.results.length}
@@ -50,20 +57,19 @@ const ProjectList = ({ message, filter = "" }) => {
                                 hasMore={!!projects.results.next}
                                 next={() => fetchMoreData(projects, setProjects)}
                             />
-
-                        ) : (
-                            <div>
-                                <p>walshie</p>
-                            </div>
-                        )}
+                        ) : null}
                     </>
-                ) : (
-                    <div>
-                        <p> loading projects... </p>
-                    </div>
-                )}
+                ) : null}
+            </div>
 
+        <div className={`${Styles.AnimateOpeningLogo} ${animateOpening ? Styles.FadeOut : null}`}>
+            HiDoc
         </div>
+        {hasLoaded ? null : <div className={Styles.AnimateOpeningLoader}>
+            <p>Loading...</p>
+        </div>}
+    </div>
+
     </>)
 };
 

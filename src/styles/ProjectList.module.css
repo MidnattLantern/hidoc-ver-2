@@ -1,3 +1,53 @@
 .ProjectListContainer{
-    border: 1px solid red;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    position: relative;
+    overflow: visible;
+}
+.AnimateOpening{
+    position: relative;
+    z-index: 0;
+    border: 2px solid var(--edge);
+    border-radius: 3px;
+    width: 10px;
+    height: 3px;
+    padding: 0px;
+    transition: width 0.5s ease-out;
+}
+.AnimateOpeningLogo{
+    position: absolute;
+    z-index: 2;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    font-size: 75px;
+    color: var(--theme);
+    background-color: var(--void);
+    padding: 10px;
+    transition: opacity 0.50s ease-in;
+    top: -50px;
+    width: 100%;
+}
+.AnimateOpening.Expand{
+    width: 100%;
+    height: 100%;
+    transition: width 0.5s ease-out, height 0.5s ease-out;
+    padding: 0px;
+}
+.AnimateOpeningLogo.FadeOut{
+    opacity: 0.0;
+}
+.AnimateOpeningLoader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: var(--void);
+    border: 3px solid var(--edge);
+    z-index: 1;
+    top: -10px;
+    padding: 5px;
+    width: 125px;
 }

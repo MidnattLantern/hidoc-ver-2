@@ -3,7 +3,8 @@ import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext"
 // styles
 import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
-
+// components
+import ProjectList from "./crud/ProjectList";
 
 const ProjectPage = () => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
@@ -23,8 +24,7 @@ const ProjectPage = () => {
     return(<>
         <div className={Styles.ProjectPageContainer}>
             <div className={getClassName()}>
-                <p>sauce</p>
-
+                <ProjectList />
             </div>
         </div>
     </>)
