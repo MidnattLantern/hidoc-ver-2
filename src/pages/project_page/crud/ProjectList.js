@@ -7,6 +7,7 @@ import { useCurrentUser } from "../../../contexts/currentUserContext";
 import Styles from "../../../styles/ProjectList.module.css";
 import "../../../global.css";
 import AnimatedContainer from "../../../components/AnimatedContainer";
+import ProjectItem from "../ProjectItem";
 
 const ProjectList = ({ message, filter = "" }) => {
 
@@ -44,9 +45,11 @@ const ProjectList = ({ message, filter = "" }) => {
                         {projects?.results?.length ? (
                             <InfiniteScroll
                                 children={
-                                    projects.results.map((post) => (
-                                        <p>item: {post.id}</p>
-                                    ))
+                                    projects.results.map((post) => (<>
+                                        <ProjectItem
+                                        key={post.id} {...post}
+                                        />
+                                    </>))
                                 }
                                 dataLength={projects.results.length}
                                 loader={"Loading..."}

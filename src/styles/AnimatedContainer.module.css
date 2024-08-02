@@ -1,6 +1,5 @@
 /* Foundation */
 .AnimatedContainerContainer {
-    border: 2px hidden var(--edge);
     border-radius: 3px;
     height: 100%;
     overflow: hidden;
@@ -45,13 +44,14 @@
     background: linear-gradient(90deg, var(--void), var(--void-shade), var(--void));
     background-size: 200% 100%;
     animation: scrollWave 1.0s linear infinite;
+    pointer-events: none; /* The launcher-box is technically still present, pointer-events prevent interuptions */
 }
 .LoaderP {
     animation: pulse 1.1s infinite;
     cursor: default;
 }
 .LauncherBoxFadeOut {
-    opacity: 0;
+    opacity: 0.0;
 }
 
 .LauncherLogo {
@@ -64,16 +64,17 @@
     width: 150px;
     height: 75px;
     cursor: default;
+    pointer-events: none; /* The launcher-box is technically still present, pointer-events prevent interuptions */
 }
 .LauncherLogoFadeOut {
-    opacity: 0;
+    opacity: 0.0;
     transition: opacity 0.5s ease-out;
 }
 
 /* Base class for the expanding div */
 .ExpandingDiv {
     z-index: 0;
-    overflow: hidden;
+    overflow: scroll;
     border: 1px solid var(--theme); /* Initial border color */
     width: 1px;
     height: 1px;

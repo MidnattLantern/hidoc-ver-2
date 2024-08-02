@@ -6,7 +6,7 @@
 }
 
 .ContainerForPhone {
-    height: 100%;
+    height: 88vh; /* technocal debt, should've been 100% instead of 88vh */
     width: 100%;
 }
 .ContainerForSmallDesktop {

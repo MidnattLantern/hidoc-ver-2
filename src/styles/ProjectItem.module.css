@@ -1,0 +1,49 @@
+.ProjectItemContainer {
+    width: auto;
+    height: auto;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+/* special logic */
+@keyframes pulse {
+    0% {
+        color: var(--white);
+    }
+    50% {
+        color: var(--theme);
+    }
+    100% {
+        color: var(--white);
+    }
+}
+
+.FeaturePoster {
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+    pointer-events: none; /* Protect downloading (unless they screenshot :P ) */
+    border: 2px solid var(--edge);
+}
+
+.Watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(0, 0, 0, 0);
+    padding: 10px;
+    font-size: 24px;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0) 40%);
+    transition: color 0.0s ease-in-out, background-image 0.0s ease-in-out;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.Watermark:hover {
+    color: var(--white);
+    background-image: linear-gradient(to bottom, var(--edge) 0%, rgba(0, 0, 0, 0) 40%);
+    animation: pulse 3.5s infinite;
+}

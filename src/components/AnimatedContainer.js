@@ -56,3 +56,4 @@ const AnimatedContainer = ({ hasLoaded, children }) => {
 };
 
 export default AnimatedContainer;
+
