@@ -12,28 +12,31 @@ const ProjectItem = ({ ...props }) => {
         project_title,
         project_description,
         feature_poster,
-        updated_at,
-        watch_proj_id,
-        setProjects,
         deployed_link,
         ProjectDetail,
     } = props;
 
     return(<div className={`${Styles.ProjectItemContainer}`}>
 
-            <Link to={`/project/detail/${id}`}>
-                <div className={Styles.Watermark}>{project_title}</div>
+
+            {ProjectDetail ? (<div className={Styles.DetailContainer}>
                 <Card.Img
                 src={feature_poster}
                 className={Styles.FeaturePoster}
                 />
-            </Link>
-            {ProjectDetail ? (<>
-                <p> detail </p>
-                <p>id: {id}</p>
                 <p>owner: {owner}</p>
-            </>) : (<>
+                <p>{project_title}</p>
+                <p>{project_description}</p>
 
+                <p>{deployed_link}</p>
+            </div>) : (<>
+                <Link to={`/project/detail/${id}`}>
+                    <div className={Styles.Watermark}>{project_title}</div>
+                    <Card.Img
+                    src={feature_poster}
+                    className={Styles.FeaturePoster}
+                    />
+                </Link>
             </>)}
             
     </div>)
