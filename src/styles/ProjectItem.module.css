@@ -1,8 +1,10 @@
 .ProjectItemContainer {
-    width: auto;
+    width: 100%;
     height: auto;
     position: relative;
-    margin-bottom: 10px;
+
+    flex: 1 1 calc(50% - 10px);
+    display: flex;
 }
 
 /* special logic */
@@ -45,5 +47,5 @@
 .Watermark:hover {
     color: var(--white);
     background-image: linear-gradient(to bottom, var(--edge) 0%, rgba(0, 0, 0, 0) 40%);
-    animation: pulse 3.5s infinite;
+    animation: pulse 3.0s infinite;
 }

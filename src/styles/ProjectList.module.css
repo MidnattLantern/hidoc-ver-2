@@ -1,9 +1,30 @@
 .ProjectListContainer{
-    display: flex;
     justify-content: center;
-    flex-direction: row;
     position: relative;
     overflow: scroll;
     height: 100%;
     border-radius: 3px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.ProjectListContainer::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.Responsive{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /*  columns */
+    gap: 0px; /* Space between items */
+    border: 2px solid red;
+}
+.Test{
+    width: 200px;
+    height: 200px;
+    
+}
+
+.Frame{
+    border: 2px solid blue;
+    display: flex;
+    justify-self: center;
 }

@@ -7,6 +7,7 @@ import SignInForm from "./pages/authentication/SignInForm";
 import SignOutPage from "./pages/authentication/SignOutPage";
 import ProjectPage from "./pages/project_page/ProjectPage";
 import HomePage from "./pages/home_page/HomePage";
+import PilotPage from "./pages/pilot/PilotPage";
 import DisplayWindowTooShort from "./pages/diverse/displayWindowTooShort";
 import './api/axiosDefaults';
 import { ResponsiveWindowContext } from "./contexts/responsiveWindowContext";
@@ -39,6 +40,8 @@ function App() {
               <Route exact path="/signout" render={() => <SignOutPage />} />
 
               <Route exact path="/project/browse" render={() => <ProjectPage />} />
+
+              <Route exact path="/pilot" render={() => <PilotPage />} />
 
               <Route exact path="/" render={() => <HomePage />} />
               <Route path="/" render={() => <h1>Page not found</h1>} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { axiosReq } from "../../../api/axiosDefaults";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../../utils/utils";
@@ -8,8 +8,10 @@ import Styles from "../../../styles/ProjectList.module.css";
 import "../../../global.css";
 import AnimatedContainer from "../../../components/AnimatedContainer";
 import ProjectItem from "../ProjectItem";
+import { ResponsiveWindowContext } from "../../../contexts/responsiveWindowContext";
 
 const ProjectList = ({ message, filter = "" }) => {
+    const { windowDimension } = useContext(ResponsiveWindowContext);
 
     const [projects, setProjects] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -39,26 +41,26 @@ const ProjectList = ({ message, filter = "" }) => {
 
     return(<>
         <AnimatedContainer hasLoaded={hasLoaded}>
-            <div className={Styles.ProjectListContainer}>
-                {hasLoaded ? (
-                    <>
-                        {projects?.results?.length ? (
-                            <InfiniteScroll
-                                children={
-                                    projects.results.map((post) => (<>
-                                        <ProjectItem
-                                        key={post.id} {...post}
-                                        />
-                                    </>))
-                                }
-                                dataLength={projects.results.length}
-                                loader={"Loading..."}
-                                hasMore={!!projects.results.next}
-                                next={() => fetchMoreData(projects, setProjects)}
-                            />
-                        ) : null}
-                    </>
-                ) : null}
+            <div className={`${Styles.ProjectListContainer}`}>
+                <div className={`${windowDimension === "bigDesktop" ? Styles.Responsive : null}`}>
+
+                {projects.results.map((post) => (<>
+                <InfiniteScroll
+                dataLength={projects.results.length}
+                next={() => fetchMoreData()}
+                hasMore={!!projects.results.next}
+                loader={<div>Loading...</div>}
+                endMessage={<div>No more items</div>}
+                >
+                    <div className={Styles.Frame}>
+                        <ProjectItem
+                        key={post.id} {...post}
+                        />
+                    </div>
+                </InfiniteScroll>
+                </>))}
+
+                </div>
             </div>
         </AnimatedContainer>
     </>)
