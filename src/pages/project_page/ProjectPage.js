@@ -1,12 +1,34 @@
 import React, { useContext } from "react";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 // styles
 import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
 // components
 import ProjectList from "./crud/ProjectList";
+import ProjectDetail from "./crud/ProjectDetail";
 
-const ProjectPage = ({ hasLoaded }) => {
+
+const ProjectPage = () => {
+    const history = useHistory();
+    const handleRedirectToBrowse = () => {
+        history.push('/project/browse/_')
+    }
+    const { action } = useParams();
+    const renderAction = (action) => {
+        switch (action) {
+            case 'browse':
+                return <ProjectList />;
+            case 'detail':
+                return <ProjectDetail />;
+            default: // "broken link" by default
+                return <div className={Styles.BrokenLinkMessage}>
+                    <h1>Broken link</h1>
+                    <button onClick={handleRedirectToBrowse}>Back to Browse</button>
+                </div>
+        };
+    };
+
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const getClassName = () => {
         switch (windowDimension) { // you can switch-case css classes like this
@@ -18,13 +40,13 @@ const ProjectPage = ({ hasLoaded }) => {
                 return Styles.ContainerForBigDesktop;
             default:
                 return '';
-        }
+        };
     };
 
     return(<>
         <div className={Styles.ProjectPageContainer}>
             <div className={getClassName()}>
-                <ProjectList />
+                {renderAction(action)}
             </div>
         </div>
     </>)

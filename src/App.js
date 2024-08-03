@@ -5,7 +5,6 @@ import './api/axiosDefaults';
 import SignUpForm from "./pages/authentication/SignUpForm";
 import SignInForm from "./pages/authentication/SignInForm";
 import SignOutPage from "./pages/authentication/SignOutPage";
-import ProjectPage from "./pages/project_page/ProjectPage";
 import HomePage from "./pages/home_page/HomePage";
 import PilotPage from "./pages/pilot/PilotPage";
 import DisplayWindowTooShort from "./pages/diverse/displayWindowTooShort";
@@ -15,6 +14,7 @@ import { ResponsiveWindowContext } from "./contexts/responsiveWindowContext";
 import Styles from "./App.module.css";
 import "./global.css";
 // components
+import ProjectPage from "./pages/project_page/ProjectPage";
 
 function App() {
   const { windowDimension, windowTooShort } = useContext(ResponsiveWindowContext);
@@ -39,7 +39,7 @@ function App() {
               <Route exact path="/signup" render={() => <SignUpForm />} />
               <Route exact path="/signout" render={() => <SignOutPage />} />
 
-              <Route exact path="/project/browse" render={() => <ProjectPage />} />
+              <Route exact path="/project/:action/:id" render={() => <ProjectPage />} />
 
               <Route exact path="/pilot" render={() => <PilotPage />} />
 

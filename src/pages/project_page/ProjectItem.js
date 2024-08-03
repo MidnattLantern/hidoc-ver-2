@@ -21,7 +21,7 @@ const ProjectItem = ({ ...props }) => {
 
     return(<div className={`${Styles.ProjectItemContainer}`}>
 
-            <Link to={`/project/detail/id`}>
+            <Link to={`/project/detail/${id}`}>
                 <div className={Styles.Watermark}>{project_title}</div>
                 <Card.Img
                 src={feature_poster}
