@@ -52,7 +52,7 @@ const ProjectList = ({ message, filter = "" }) => {
                 loader={<div>Loading...</div>}
                 endMessage={<div>No more items</div>}
                 >
-                    <div className={Styles.Frame}>
+                    <div className={`${Styles.Frame} ${windowDimension === "bigDesktop" ? Styles.ResponsiveFrame : null}`}>
                         <ProjectItem
                         key={post.id} {...post}
                         />

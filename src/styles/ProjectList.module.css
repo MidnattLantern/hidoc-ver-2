@@ -1,7 +1,6 @@
 .ProjectListContainer{
     justify-content: center;
     position: relative;
-    overflow: scroll;
     height: 100%;
     border-radius: 3px;
     -ms-overflow-style: none; /* IE and Edge */
@@ -14,17 +13,16 @@
 .Responsive{
     display: grid;
     grid-template-columns: repeat(3, 1fr); /*  columns */
-    gap: 0px; /* Space between items */
-    border: 2px solid red;
-}
-.Test{
-    width: 200px;
-    height: 200px;
-    
+    gap: 10px; /* Space between items */
 }
 
 .Frame{
-    border: 2px solid blue;
     display: flex;
     justify-self: center;
+
+}
+.ResponsiveFrame{
+    width: 330px;
+    height: 330px;
+    overflow: hidden;
 }
