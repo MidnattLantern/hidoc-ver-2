@@ -32,8 +32,7 @@ const ProjectDetail = () => {
             } catch(err) {
 
             }
-        }
-
+        };
 
         handleMount();
     }, [id]);
@@ -42,15 +41,19 @@ const ProjectDetail = () => {
     return (<div className={`
     ${Styles.ProjectDetailContainer}
     `}>
-        {currentUser ? <p>owner</p> : null}
-            <button
-            onClick={handleRedirectToBrowse}
-            className={`
-                ${Styles.BackToBrowseButton}
-                ${windowDimension === "phone" ? Styles.BackToBrowseButton_AlignForPhone: Styles.BackToBrowseButton_AlignForAnyDesktop}
-            `}
-            >Browse</button>
-            <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>
+        <div className={`
+                ${hasLoaded ? Styles.Reveal : Styles.Withhold}
+            `}>
+            {currentUser ? <p>owner</p> : null}
+                <button
+                onClick={handleRedirectToBrowse}
+                className={`
+                    ${Styles.BackToBrowseButton}
+                    ${windowDimension === "phone" ? Styles.BackToBrowseButton_AlignForPhone: Styles.BackToBrowseButton_AlignForAnyDesktop}
+                `}
+                >Browse</button>
+                <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>
+            </div>
 
     </div>)
 };

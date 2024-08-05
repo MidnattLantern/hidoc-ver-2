@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -9,8 +9,16 @@ import Styles from "../../styles/AuthenticationForm.module.css";
 import "../../global.css";
 
 const SignInForm = () => {
+    const [hasLoaded, setHasLoaded] = useState(false)
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const setCurrentUser = useSetCurrentUser();
+
+    useEffect(() => {
+        const handleMount = async () => {
+            setHasLoaded(true);
+        };
+        handleMount();
+    }, []);
 
     const [signInData, setSignInData] = useState({
         username: "",
@@ -48,12 +56,15 @@ const SignInForm = () => {
     }
 
     return (
-        <div className={`${Styles.AuthenticationContainer}`}>
+        <div className={`
+        ${hasLoaded ? Styles.Reveal : Styles.Withhold}
+        ${Styles.AuthenticationContainer}
+        `}>
             <div className={`
             ${errors.username || errors.password1 || errors.password2 ? Styles.ExtendContainerForErrorMessages : null }
             ${windowDimension === "bigDesktop" ? Styles.ContainerForDesktop : Styles.ContainerForPhone}
             `}>
-                <Form className={Styles.AuthenticationIsland} onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit}>
                     <h1>Sign in</h1>
                     <br/>
 
@@ -93,7 +104,7 @@ const SignInForm = () => {
                         <button className={Styles.AuthenticationButton}>Sign in</button> :
                         <div className={Styles.AuthenticationButtonDisabled}>Sign in</div> }
                         <p className={Styles.SignParagraph}>
-                            or <a onClick={handleMoveToSignUp} className={Styles.Anchor}>Sign up</a>
+                            or <button onClick={handleMoveToSignUp} className={Styles.Anchor}>Sign up</button>
                         </p>
                     </div>
                 </Form>

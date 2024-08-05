@@ -1,5 +1,13 @@
 /* Foundation */
+.Withhold{
+    opacity: 0;
+}
+.Reveal{
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+}
 .ProjectDetailContainer{
+    opacity: 1;
     width: 100%;
     height: 100%;
     overflow-x: hidden;

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -7,8 +7,8 @@ import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext"
 import Styles from "../../styles/AuthenticationForm.module.css";
 
 const SignUpForm = () => {
+    const [hasLoaded, setHasLoaded] = useState(false)
     const { windowDimension } = useContext(ResponsiveWindowContext);
-
     const [signUpData, setSignUpData] = useState({
         username: "",
         password1: "",
@@ -23,6 +23,13 @@ const SignUpForm = () => {
 
     const [errors, setErrors] = useState({}); // leave {} empty or there'll be errors
     const history = useHistory();
+
+    useEffect(() => {
+        const handleMount = async () => {
+            setHasLoaded(true);
+        };
+        handleMount();
+    }, []);
 
     const handleChange = (event) => {
         setSignUpData({
@@ -47,7 +54,10 @@ const SignUpForm = () => {
     }
 
     return (
-        <div className={`${Styles.AuthenticationContainer}`}>
+        <div className={`
+        ${hasLoaded ? Styles.Reveal : Styles.Withhold}
+        ${Styles.AuthenticationContainer}
+        `}>
             <div className={`
             ${errors.username || errors.password1 || errors.password2 ? Styles.ExtendContainerForErrorMessages : null }
             ${windowDimension === "bigDesktop" ? Styles.ContainerForDesktop : Styles.ContainerForPhone}

@@ -7,7 +7,17 @@
     align-items: center;
     justify-content: center;
 }
+.Withhold{
+    opacity: 0;
+}
+.Reveal{
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+}
 .Header {
+    cursor: default;
+}
+h1{
     cursor: default;
 }
 
@@ -119,11 +129,12 @@
 }
 .Anchor {
     color: var(--theme);
-    transition: color 0.15s ease;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    text-decoration: none;
 }
 .Anchor:hover {
-    color: var(--white);
-    transition: color 0.15s ease;
+    text-decoration: underline;
 }
 .AuthenticationButtonDisabled {
     background-color: var(--void);
