@@ -2,9 +2,9 @@
     width: 100%;
     height: auto;
     position: relative;
-
     flex: 1 1 calc(50% - 10px);
     display: flex;
+    justify-content: center;
 }
 
 /* special logic */
@@ -20,12 +20,19 @@
     }
 }
 
-.FeaturePoster {
+.Title{
+    cursor: default;
+}
+
+.FeaturePoster{
     width: 100%;
     height: auto;
     border-radius: 3px;
     pointer-events: none; /* Protect downloading (unless they screenshot :P ) */
     border: 2px solid var(--edge);
+}
+.FeaturePosterDetail{
+    max-height: 650px;
 }
 
 .Watermark {
@@ -48,4 +55,19 @@
     color: var(--white);
     background-image: linear-gradient(to bottom, var(--edge) 0%, rgba(0, 0, 0, 0) 40%);
     animation: pulse 3.0s infinite;
+}
+
+.Description{
+    border: 2px solid var(--edge);
+    background-color: var(--void);
+    color: var(--white);
+    padding: 15px;
+    cursor: default;
+}
+.DeployedLink{
+    color: var(--theme);
+    text-decoration: none;
+}
+.DeployedLink:hover{
+    text-decoration: underline;
 }

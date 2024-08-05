@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ResponsiveWindowContext } from "../../../contexts/responsiveWindowContext";
 // Styles
 import Styles from "../../../styles/ProjectDetail.module.css";
 import "../../../global.css";
 // components
 import ProjectItem from "../ProjectItem";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useCurrentUser } from "../../../contexts/currentUserContext";
 import { axiosReq } from "../../../api/axiosDefaults";
 
@@ -13,6 +14,12 @@ const ProjectDetail = () => {
     const [project, setProject] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
     const currentUser = useCurrentUser();
+    const history = useHistory();
+    const { windowDimension } = useContext(ResponsiveWindowContext);
+
+    const handleRedirectToBrowse = () => {
+        history.push('/project/browse/_')
+    }
 
     useEffect(() => {
         const handleMount = async () => {
@@ -31,11 +38,20 @@ const ProjectDetail = () => {
         handleMount();
     }, [id]);
 
-
-    return (<div className={Styles.ProjectDetailContainer}>
+// AlignForPhone: Moving Go Back button to the bottom for phone view
+    return (<div className={`
+    ${Styles.ProjectDetailContainer}
+    `}>
         {currentUser ? <p>owner</p> : null}
-        <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>
-        
+            <button
+            onClick={handleRedirectToBrowse}
+            className={`
+                ${Styles.BackToBrowseButton}
+                ${windowDimension === "phone" ? Styles.BackToBrowseButton_AlignForPhone: Styles.BackToBrowseButton_AlignForAnyDesktop}
+            `}
+            >Browse</button>
+            <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>
+
     </div>)
 };
 

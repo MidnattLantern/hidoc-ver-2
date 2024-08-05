@@ -20,15 +20,26 @@ const ProjectItem = ({ ...props }) => {
 
 
             {ProjectDetail ? (<div className={Styles.DetailContainer}>
-                <Card.Img
-                src={feature_poster}
-                className={Styles.FeaturePoster}
-                />
-                <p>owner: {owner}</p>
-                <p>{project_title}</p>
-                <p>{project_description}</p>
 
-                <p>{deployed_link}</p>
+                    <h1 className={Styles.Title}>{project_title}</h1>
+                    <Card.Img
+                    src={feature_poster}
+                    className={`${Styles.FeaturePoster} ${Styles.FeaturePosterDetail}`}
+                    />
+                    <div className={Styles.Description}>
+                        Artist: {owner}
+                        {project_description !== "" ? (<>
+                            <hr/>
+                            {project_description}
+                        </>) : null }
+                        {deployed_link !== "" ? (<>
+                            <hr/>
+                            <p>deployed link: <a className={Styles.DeployedLink}target="blank_" href={deployed_link}>{deployed_link}</a> </p>
+                        </>) : null }
+                    </div>
+
+
+                
             </div>) : (<>
                 <Link to={`/project/detail/${id}`}>
                     <div className={Styles.Watermark}>{project_title}</div>
