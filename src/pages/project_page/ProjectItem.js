@@ -15,7 +15,11 @@ const ProjectItem = ({ ...props }) => {
         deployed_link,
         ProjectDetail,
         IsOwner,
+        ArtistLibrary,
     } = props;
+
+
+    const library = "browse"
 
     return(<div className={`${Styles.ProjectItemContainer}`}>
 
@@ -43,7 +47,7 @@ const ProjectItem = ({ ...props }) => {
 
                 
             </div>) : (<>
-                <Link to={`/browse/detail/${id}`}>
+                <Link to={`/${library}/detail/${id}`}>
                     <div className={Styles.Watermark}>{project_title}</div>
                     <Card.Img
                     src={feature_poster}

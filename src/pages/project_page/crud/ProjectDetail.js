@@ -53,7 +53,7 @@ const ProjectDetail = () => {
                 >Browse</button>
 
                 {currentUser ? <div className={Styles.OwnerOptions}>
-                <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail IsOwner/>
+                <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>
                 </div> :
                 <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>
                 }

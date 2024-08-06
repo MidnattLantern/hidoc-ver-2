@@ -39,7 +39,8 @@ function App() {
               <Route exact path="/signup" render={() => <SignUpForm />} />
               <Route exact path="/signout" render={() => <SignOutPage />} />
 
-              <Route exact path="/:library/:action/:id" render={() => <ProjectPage />} />
+              <Route exact path="/browse/:action/:id" render={() => <ProjectPage />} />
+              <Route exact path="/artist/:action/:id" render={() => <ArtistPage />} />
 
               <Route exact path="/" render={() => <HomePage />} />
               <Route path="/" render={() => <h1>Page not found</h1>} />

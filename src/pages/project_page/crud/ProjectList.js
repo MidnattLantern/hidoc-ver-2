@@ -3,36 +3,29 @@ import { axiosReq } from "../../../api/axiosDefaults";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../../utils/utils";
 import { useCurrentUser } from "../../../contexts/currentUserContext";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import AnimatedContainer from "../../../components/AnimatedContainer";
 // styles
 import Styles from "../../../styles/ProjectList.module.css";
 import "../../../global.css";
-import AnimatedContainer from "../../../components/AnimatedContainer";
+
 import ProjectItem from "../ProjectItem";
 import { ResponsiveWindowContext } from "../../../contexts/responsiveWindowContext";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-const ProjectList = ({ message, filter = "" }) => {
+const ProjectList = ({ message, filter = "", ArtistLibrary }) => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
-    const { library } = useParams();
-    const { id } = useParams();
 
     const [projects, setProjects] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
     // eslint-disable-next-line
     const [query, setQuery] = useState("");
     const currentUser = useCurrentUser();
+    const {id} = useParams();
 
     useEffect(() => {
         const fetchProjects = async () => { // "extra logic"
-            if (library === "browse") {
-                try {
-                    const { data } = await axiosReq.get(`/projects/?${filter}search=${query}`);
-                    setProjects(data);
-                    setHasLoaded(true);
-                } catch (err) {
 
-                }
-            } else if (library === "artist") {
+            if (ArtistLibrary) {
                 try {
                     const {data} = await axiosReq.get(`/projects/?watching_project__owner__artaccount=&owner__artaccount=${id}`)
                     setProjects(data);
@@ -40,7 +33,27 @@ const ProjectList = ({ message, filter = "" }) => {
                 } catch(err) {
 
                 }
+            } else {
+                try {
+                    const { data } = await axiosReq.get(`/projects/?${filter}search=${query}`);
+                    setProjects(data);
+                    setHasLoaded(true);
+                } catch (err) {
+
+                }
             }
+
+
+/*
+                try {
+                    const {data} = await axiosReq.get(`/projects/?watching_project__owner__artaccount=&owner__artaccount=${id}`)
+                    setProjects(data);
+                    setHasLoaded(true)
+                } catch(err) {
+
+                }
+*/
+
         };
 
         setHasLoaded(false);
@@ -50,21 +63,23 @@ const ProjectList = ({ message, filter = "" }) => {
         return () => {
             clearTimeout(timer);
         };
-    }, [filter, query, currentUser, id, library]);
+    }, [filter, query, currentUser, ArtistLibrary, id]);
 
     return(<>
         <AnimatedContainer hasLoaded={hasLoaded}>
+
+        <p>ArtistLibrary: {ArtistLibrary ? <p>true</p> : <p>false</p>}</p>
+
             <div className={`${Styles.ProjectListContainer}`}>
                 <div className={`${windowDimension === "bigDesktop" ? Styles.Responsive : null}`}>
-
-                {projects.results.map((post) => (<>
-                <InfiniteScroll
-                dataLength={projects.results.length}
-                next={() => fetchMoreData()}
-                hasMore={!!projects.results.next}
-                loader={<div>Loading...</div>}
-                endMessage={<div>No more items</div>}
-                >
+                    {projects.results.map((post) => (<>
+                    <InfiniteScroll
+                    dataLength={projects.results.length}
+                    next={() => fetchMoreData()}
+                    hasMore={!!projects.results.next}
+                    loader={<div>Loading...</div>}
+                    endMessage={<div>No more items</div>}
+                    >
                     <div className={`${Styles.Frame} ${windowDimension === "bigDesktop" ? Styles.ResponsiveFrame : null}`}>
                         <ProjectItem
                         key={post.id} {...post}
