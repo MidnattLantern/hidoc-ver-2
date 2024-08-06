@@ -3,6 +3,7 @@ import { axiosReq } from "../../../api/axiosDefaults";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../../utils/utils";
 import { useCurrentUser } from "../../../contexts/currentUserContext";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 // styles
 import Styles from "../../../styles/ProjectList.module.css";
 import "../../../global.css";
@@ -12,6 +13,8 @@ import { ResponsiveWindowContext } from "../../../contexts/responsiveWindowConte
 
 const ProjectList = ({ message, filter = "" }) => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
+    const { library } = useParams();
+    const { id } = useParams();
 
     const [projects, setProjects] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -21,12 +24,22 @@ const ProjectList = ({ message, filter = "" }) => {
 
     useEffect(() => {
         const fetchProjects = async () => { // "extra logic"
-            try {
-                const { data } = await axiosReq.get(`/projects/?${filter}search=${query}`);
-                setProjects(data);
-                setHasLoaded(true);
-            } catch (err) {
+            if (library === "browse") {
+                try {
+                    const { data } = await axiosReq.get(`/projects/?${filter}search=${query}`);
+                    setProjects(data);
+                    setHasLoaded(true);
+                } catch (err) {
 
+                }
+            } else if (library === "artist") {
+                try {
+                    const {data} = await axiosReq.get(`/projects/?watching_project__owner__artaccount=&owner__artaccount=${id}`)
+                    setProjects(data);
+                    setHasLoaded(true)
+                } catch(err) {
+
+                }
             }
         };
 
@@ -37,7 +50,7 @@ const ProjectList = ({ message, filter = "" }) => {
         return () => {
             clearTimeout(timer);
         };
-    }, [filter, query, currentUser]);
+    }, [filter, query, currentUser, id, library]);
 
     return(<>
         <AnimatedContainer hasLoaded={hasLoaded}>

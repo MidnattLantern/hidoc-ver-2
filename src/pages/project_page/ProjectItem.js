@@ -43,7 +43,7 @@ const ProjectItem = ({ ...props }) => {
 
                 
             </div>) : (<>
-                <Link to={`/project/detail/${id}`}>
+                <Link to={`/browse/detail/${id}`}>
                     <div className={Styles.Watermark}>{project_title}</div>
                     <Card.Img
                     src={feature_poster}

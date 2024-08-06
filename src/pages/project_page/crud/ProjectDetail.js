@@ -18,7 +18,7 @@ const ProjectDetail = () => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
 
     const handleRedirectToBrowse = () => {
-        history.push('/project/browse/_')
+        history.push('/browse/list/_')
     }
 
     useEffect(() => {

@@ -12,12 +12,12 @@ import ProjectDetail from "./crud/ProjectDetail";
 const ProjectPage = () => {
     const history = useHistory();
     const handleRedirectToBrowse = () => {
-        history.push('/project/browse/_')
+        history.push('/browse/list/_')
     }
     const { action } = useParams();
     const renderAction = (action) => {
         switch (action) {
-            case 'browse':
+            case 'list':
                 return <ProjectList />;
             case 'detail':
                 return <ProjectDetail />;
