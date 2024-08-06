@@ -1,0 +1,7 @@
+.ArtistHeaderContainer{
+    border: 2px solid var(--edge);
+    border-radius: 2px;
+    margin-bottom: 10px;
+    padding: 5px;
+    cursor: default;
+}

@@ -18,7 +18,7 @@ const ProjectDetail = () => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
 
     const handleRedirectToBrowse = () => {
-        history.push('/browse/list/_')
+        history.goBack(); // less robust, could crash in rare cases
     }
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const ProjectDetail = () => {
                     ${Styles.BackToBrowseButton}
                     ${windowDimension === "phone" ? Styles.BackToBrowseButton_AlignForPhone: Styles.BackToBrowseButton_AlignForAnyDesktop}
                 `}
-                >Browse</button>
+                >Go back</button>
 
                 {currentUser ? <div className={Styles.OwnerOptions}>
                 <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { useCurrentUser } from "../../contexts/currentUserContext";
 // styles
 import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
@@ -9,15 +8,12 @@ import "../../global.css";
 import ProjectList from "./crud/ProjectList";
 import ProjectDetail from "./crud/ProjectDetail";
 
-
 const ArtistPage = () => {
     const history = useHistory();
     const handleRedirectToBrowse = () => {
         history.push('/browse/list/_')
     }
     const { action } = useParams();
-    const currentUser = useCurrentUser(); // using.toString() 
-    const { id } = useParams();
     const renderAction = (action) => {
         switch (action) {
             case 'list':
@@ -48,7 +44,6 @@ const ArtistPage = () => {
 
     return(<>
         <div className={Styles.ProjectPageContainer}>
-        {(currentUser?.pk.toString()) === id ? <p>Create project</p> : null}
             <div className={getClassName()}>
                 {renderAction(action)}
             </div>

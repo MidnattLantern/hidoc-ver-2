@@ -6,14 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from 'react-router-dom';
 import { CurrentUserProvider } from './contexts/currentUserContext';
 import { ResponsiveWindowProvider } from "./contexts/responsiveWindowContext";
+import { AccountDataProvider } from './contexts/AccountDataContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <CurrentUserProvider>
-        <ResponsiveWindowProvider>
-          <App />
-        </ResponsiveWindowProvider>
+        <AccountDataProvider>
+          <ResponsiveWindowProvider>
+            <App />
+          </ResponsiveWindowProvider>
+        </AccountDataProvider>
       </CurrentUserProvider>
     </Router>
   </React.StrictMode>,

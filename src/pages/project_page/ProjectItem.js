@@ -18,8 +18,7 @@ const ProjectItem = ({ ...props }) => {
         ArtistLibrary,
     } = props;
 
-
-    const library = "browse"
+    const library = ArtistLibrary ? "artist" : "browse";
 
     return(<div className={`${Styles.ProjectItemContainer}`}>
 
