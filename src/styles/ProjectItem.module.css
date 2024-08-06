@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-/* special logic */
+/* Special logic */
 @keyframes pulse {
     0% {
         color: var(--white);
@@ -70,4 +70,22 @@
 }
 .DeployedLink:hover{
     text-decoration: underline;
+}
+
+.EditButton{
+    border: 2px solid var(--edge);
+    background-color: var(--void);
+    padding: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white);
+    box-shadow: 0 2px 10px var(--void-shade);
+    transition: color 0.15s ease;
+}
+.EditButton:hover{
+    color: var(--theme);
+    background-color: var(--void-shade);
+    transition: color 0.15s ease;
 }

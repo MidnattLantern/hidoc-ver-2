@@ -14,6 +14,7 @@ import Styles from "./App.module.css";
 import "./global.css";
 // components
 import ProjectPage from "./pages/project_page/ProjectPage";
+import ArtistPage from "./pages/project_page/ArtistPage";
 
 function App() {
   const { windowDimension, windowTooShort } = useContext(ResponsiveWindowContext);
@@ -39,6 +40,7 @@ function App() {
               <Route exact path="/signout" render={() => <SignOutPage />} />
 
               <Route exact path="/project/:action/:id" render={() => <ProjectPage />} />
+              <Route exact path="/artist/:id" render={() => <ArtistPage />} />
 
               <Route exact path="/" render={() => <HomePage />} />
               <Route path="/" render={() => <h1>Page not found</h1>} />

@@ -14,6 +14,7 @@ const ProjectItem = ({ ...props }) => {
         feature_poster,
         deployed_link,
         ProjectDetail,
+        IsOwner,
     } = props;
 
     return(<div className={`${Styles.ProjectItemContainer}`}>
@@ -27,7 +28,8 @@ const ProjectItem = ({ ...props }) => {
                     className={`${Styles.FeaturePoster} ${Styles.FeaturePosterDetail}`}
                     />
                     <div className={Styles.Description}>
-                        Artist: {owner}
+                        {IsOwner ? <button className={Styles.EditButton}> Edit {project_title} </button> : <p>Artist: {owner}</p>}
+
                         {project_description !== "" ? (<>
                             <hr/>
                             {project_description}

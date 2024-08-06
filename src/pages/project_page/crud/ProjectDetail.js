@@ -44,7 +44,6 @@ const ProjectDetail = () => {
         <div className={`
                 ${hasLoaded ? Styles.Reveal : Styles.Withhold}
             `}>
-            {currentUser ? <p>owner</p> : null}
                 <button
                 onClick={handleRedirectToBrowse}
                 className={`
@@ -52,7 +51,12 @@ const ProjectDetail = () => {
                     ${windowDimension === "phone" ? Styles.BackToBrowseButton_AlignForPhone: Styles.BackToBrowseButton_AlignForAnyDesktop}
                 `}
                 >Browse</button>
+
+                {currentUser ? <div className={Styles.OwnerOptions}>
+                <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail IsOwner/>
+                </div> :
                 <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>
+                }
             </div>
 
     </div>)
