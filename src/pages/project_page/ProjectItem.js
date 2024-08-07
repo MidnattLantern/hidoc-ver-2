@@ -22,16 +22,14 @@ const ProjectItem = ({ ...props }) => {
 
     return(<div className={`${Styles.ProjectItemContainer}`}>
 
-
             {ProjectDetail ? (<div className={Styles.DetailContainer}>
 
-                    <h1 className={Styles.Title}>{project_title}</h1>
-                    <Card.Img
-                    src={feature_poster}
-                    className={`${Styles.FeaturePoster} ${Styles.FeaturePosterDetail}`}
-                    />
+                    <h1 className={Styles.Title}>
+                        {project_title}
+                    </h1>
+                    <Card.Img src={feature_poster} className={`${Styles.FeaturePoster} ${Styles.FeaturePosterDetail}`}/>
                     <div className={Styles.Description}>
-                        {IsOwner ? <button className={Styles.EditButton}> Edit {project_title} </button> : <p>Artist: {owner}</p>}
+                        {IsOwner ? <button className={Styles.EditButton}>Edit {project_title} </button> : <p>Artist: {owner}</p>}
 
                         {project_description !== "" ? (<>
                             <hr/>
@@ -42,8 +40,6 @@ const ProjectItem = ({ ...props }) => {
                             <p>deployed link: <a className={Styles.DeployedLink}target="blank_" href={deployed_link}>{deployed_link}</a> </p>
                         </>) : null }
                     </div>
-
-
                 
             </div>) : (<>
                 <Link to={`/${library}/detail/${id}`}>

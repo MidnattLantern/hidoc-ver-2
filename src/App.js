@@ -41,6 +41,7 @@ function App() {
 
               <Route exact path="/browse/:action/:id" render={() => <ProjectPage />} />
               <Route exact path="/artist/:action/:id" render={() => <ArtistPage />} />
+              <Route exact path="/project/:action/:id" render={() => <ProjectPage />} />
 
               <Route exact path="/" render={() => <HomePage />} />
               <Route path="/" render={() => <h1>Page not found</h1>} />
