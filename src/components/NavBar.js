@@ -70,6 +70,13 @@ const NavBar = () => {
                 Browse
             </NavLink>
 
+            <NavLink className={`
+            ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
+            `}
+            exact activeClassName={Styles.Active} to="/piloting">
+                Piloting
+            </NavLink>
+
             {currentUser ? authenticatedOptions : nonAuthenticatedOptions}
         </div>
         </> )

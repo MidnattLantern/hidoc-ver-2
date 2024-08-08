@@ -1,10 +1,10 @@
 :root {
     --theme: rgb(255, 85, 105);
-    --void: rgb(33,32,34);
-    --void-transparent: rgba(33,32,34),0.4;
-    --void-shade: rgb(12,11,13);
-    --void-shade-transparent: rgba(12,11,13,0.4);
-    --edge: rgb(60,59,61);
-    --white: rgb(210,209,211);
+    --void: rgb(33,31,35);
+    --void-transparent: rgba(33,31,35),0.4;
+    --void-shade: rgb(12,10,14);
+    --void-shade-transparent: rgba(12,10,14,0.4);
+    --edge: rgb(60,58,62);
+    --white: rgb(210,208,212);
     --grey: rgba(200,200,220,0.4)
 }

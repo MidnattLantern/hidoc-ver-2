@@ -6,6 +6,7 @@ import SignUpForm from "./pages/authentication/SignUpForm";
 import SignInForm from "./pages/authentication/SignInForm";
 import SignOutPage from "./pages/authentication/SignOutPage";
 import HomePage from "./pages/home_page/HomePage";
+import Piloting from "./pages/home_page/Piloting";
 import DisplayWindowTooShort from "./pages/diverse/displayWindowTooShort";
 import './api/axiosDefaults';
 import { ResponsiveWindowContext } from "./contexts/responsiveWindowContext";
@@ -42,6 +43,8 @@ function App() {
               <Route exact path="/browse/:action/:id" render={() => <ProjectPage />} />
               <Route exact path="/artist/:action/:id" render={() => <ArtistPage />} />
               <Route exact path="/project/:action/:id" render={() => <ProjectPage />} />
+
+              <Route exact path="/piloting" render={() => <Piloting />} />
 
               <Route exact path="/" render={() => <HomePage />} />
               <Route path="/" render={() => <h1>Page not found</h1>} />

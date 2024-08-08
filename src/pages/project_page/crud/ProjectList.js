@@ -12,9 +12,6 @@ import ProjectItem from "../ProjectItem";
 import ArtistHeader from "../ArtistHeader";
 import { ResponsiveWindowContext } from "../../../contexts/responsiveWindowContext";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { Card } from "react-bootstrap";
-
-import MyImage from "../../../assets/pilot/testy2.png"
 
 const ProjectList = ({ filter = "", ArtistLibrary }) => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
@@ -81,14 +78,6 @@ const ProjectList = ({ filter = "", ArtistLibrary }) => {
                                     />
 
                                 </>):(<>
-
-                                    {/*
-                                    <ProjectItem
-                                    key={post.id} {...post}
-                                    className={`${Styles.GridFrame} ${windowDimension === "bigDesktop" ? Styles.GridFrameBig : null}`}
-                                    ArtistLibrary
-                                    />                                    
-                                    */}
 
                                     <ProjectItem
                                     key={post.id} {...post}
