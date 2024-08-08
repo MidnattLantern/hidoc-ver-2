@@ -1,7 +1,7 @@
 //import { jwtDecode } from "jwt-decode";
 import { axiosReq } from "../api/axiosDefaults";
 
-export const fetchMoreData = async (resource, setResource) => {
+export const fetchMoreData = async (resource, setResource) => { // failed attempt at InfiniteScroll
     try {
       const { data } = await axiosReq.get(resource.next);
       setResource((prevResource) => ({

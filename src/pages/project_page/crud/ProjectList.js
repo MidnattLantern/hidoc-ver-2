@@ -22,20 +22,38 @@ const ProjectList = ({ filter = "", ArtistLibrary }) => {
     const currentUser = useCurrentUser();
     const {id} = useParams();
 
+    // in place of InfiniteScroll
+    const [page, setPage] = useState(1);
+    const [nextPage, setNextPage] = useState(true);
+    const [previousPage, setPreviousPage] = useState(true);
+    // in place of InfiniteScroll
+    const handleGetNext = (event) => {
+        event.preventDefault();
+        setPage(page + 1);
+    }
+    const handleGetPrevious = (event) => {
+        event.preventDefault();
+        setPage(page - 1);
+    }
+
     useEffect(() => {
         const fetchProjects = async () => { // "extra logic"
             if (ArtistLibrary) {
                 try { // for artist page
-                    const {data} = await axiosReq.get(`/projects/?watching_project__owner__artaccount=&owner__artaccount=${id}`);
+                    const {data} = await axiosReq.get(`/projects/?owner__artaccount=${id}&page=${page}&watching_project__owner__artaccount=`);
                     setProjects(data);
+                    setNextPage(data.next !== null); // in place of InfiniteScroll
+                    setPreviousPage(data.previous !== null); // in place of InfiniteScroll
                     setHasLoaded(true)
                 } catch(err) {
 
                 }
             } else {
                 try { // browse page by default
-                    const { data } = await axiosReq.get(`/projects/?${filter}search=${query}`);
+                    const { data } = await axiosReq.get(`/projects/?page=${page}`);
                     setProjects(data);
+                    setNextPage(data.next !== null); // in place of InfiniteScroll
+                    setPreviousPage(data.previous !== null); // in place of InfiniteScroll
                     setHasLoaded(true);
                 } catch (err) {
 
@@ -50,7 +68,7 @@ const ProjectList = ({ filter = "", ArtistLibrary }) => {
         return () => {
             clearTimeout(timer);
         };
-    }, [filter, query, currentUser, ArtistLibrary, id]);
+    }, [filter, query, currentUser, ArtistLibrary, id, page]);
 
     return(<>
         <AnimatedContainer hasLoaded={hasLoaded}>
@@ -90,7 +108,23 @@ const ProjectList = ({ filter = "", ArtistLibrary }) => {
                     </>))}
                 </div>
             </div>
+
+            <div className={`${Styles.PageTurnContainer} ${windowDimension === "phone" ? Styles.PageTurnContainerPhone : null}`}>
+                {previousPage ? (<>
+                    <button className={`${Styles.PageTurnButton} ${Styles.PagePreviousExists}`} onClick={handleGetPrevious}>previous</button>
+                </>) : (<>
+                    <button className={`${Styles.PageTurnButton}`} onClick={(event) => {event.preventDefault()}}>previous</button>
+                </>)}
+
+                {nextPage ? (<>
+                    <button className={`${Styles.PageTurnButton} ${Styles.PageNextExists}`} onClick={handleGetNext}>next</button>
+                </>) : (<>
+                    <button className={`${Styles.PageTurnButton}`} onClick={(event) => {event.preventDefault()}}>next</button>
+                </>)}
+            </div>
+
         </AnimatedContainer>
+
     </>)
 };
 
