@@ -6,7 +6,6 @@
     border-radius: 3px;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
-    overflow-x: hidden;
     display: flex;
     align-items: center;
 }

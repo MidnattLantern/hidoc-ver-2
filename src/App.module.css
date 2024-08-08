@@ -15,7 +15,13 @@
 .MainViewContainer{
     flex-grow: 1; /* fills the rest of the page so that NavBar can be fixed */
     padding: 10px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
+.MainViewContainer::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
 .NavBarContainer{
     padding: 10px;
 }

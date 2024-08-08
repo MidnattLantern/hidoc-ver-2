@@ -1,8 +1,8 @@
 .ArtistHeaderContainer{
     border: 2px solid var(--edge);
     border-radius: 2px;
-    margin-bottom: 10px;
-    padding: 5px;
+    margin: 15px;
+    padding: 10px;
     cursor: default;
 }
 
@@ -28,6 +28,7 @@
     background-color: var(--void);
     padding: 7px;
     margin: 7px;
+    margin-left: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
