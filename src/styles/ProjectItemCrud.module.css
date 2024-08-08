@@ -23,7 +23,7 @@
 .NoFeaturePoster{
     margin-top: 20px;
     pointer-events: none;
-    color: var(--grey);
+    color: var(--theme);
 }
 
 .FeaturePoster{

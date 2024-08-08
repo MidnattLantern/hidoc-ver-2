@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 //styles
 import Styles from "../../styles/ProjectItem.module.css";
 import "../../global.css";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
 
 const ProjectItem = ({ ...props }) => {
     const {
@@ -18,6 +19,7 @@ const ProjectItem = ({ ...props }) => {
         ArtistLibrary,
     } = props;
 
+    const { windowDimension } = useContext(ResponsiveWindowContext);
     const library = ArtistLibrary ? "artist" : "browse";
 
     return(<div className={`${Styles.ProjectItemContainer}`}>
@@ -42,6 +44,16 @@ const ProjectItem = ({ ...props }) => {
                     </div>
                 
             </div>) : (<>
+
+                <Link to={`/${library}/detail/${id}`}>
+                    <div className={`${Styles.Watermark} ${windowDimension === "bigDesktop" ? Styles.WatermarkBig : null}`}>{project_title}</div>
+                    <Card.Img
+                        src={feature_poster}
+                        className={`${Styles.GridFrame} ${windowDimension === "bigDesktop" ? Styles.GridFrameBig : null}`}
+                    />
+                </Link>
+
+{/*
                 <Link to={`/${library}/detail/${id}`}>
                     <div className={Styles.Watermark}>{project_title}</div>
                     <Card.Img
@@ -49,6 +61,9 @@ const ProjectItem = ({ ...props }) => {
                     className={Styles.FeaturePoster}
                     />
                 </Link>
+*/}
+
+
             </>)}
             
     </div>)

@@ -41,8 +41,9 @@ const ProjectItemCrud = () => {
         }
     };
 
-    const handleDiscard = () => {
-        history.goBack()
+    const handleDiscard = (event) => {
+        event.preventDefault(); // without this, the project would've been created when clicking discard
+        history.goBack();
     };
 
     const handleSubmit = async (userInput) => {
@@ -74,7 +75,7 @@ const ProjectItemCrud = () => {
                     className={`${Styles.FormControl} ${Styles.TitleFormControl}`}
                     type={"title"}
                     name={"project_title"}
-                    placeholder={"Project Title"}
+                    placeholder={"Project title (optional)"}
                     value={project_title}
                     onChange={handleStringInput}
                     />
@@ -97,7 +98,7 @@ const ProjectItemCrud = () => {
                                 />
                             </figure>
                         </>) : (<>
-                            <p className={Styles.NoFeaturePoster}>No image</p>
+                            <p className={Styles.NoFeaturePoster}>File must be smaller than 1MB</p>
                         </>)}
 
                         <Form.File
@@ -118,7 +119,7 @@ const ProjectItemCrud = () => {
 
                 <div className={Styles.Description}>
                     <div className={Styles.SaveDiscardButtonContainer}>
-                        {project_title !== "" && feature_poster !== "" ? (<>
+                        {feature_poster !== "" ? (<>
                             <button type={"submit"} className={Styles.SaveDiscardButton}>Save</button>
                         </>): (<>
                             <div className={`${Styles.DisabledButton}`}>Save</div>

@@ -12,8 +12,11 @@ import ProjectItem from "../ProjectItem";
 import ArtistHeader from "../ArtistHeader";
 import { ResponsiveWindowContext } from "../../../contexts/responsiveWindowContext";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Card } from "react-bootstrap";
 
-const ProjectList = ({ message, filter = "", ArtistLibrary }) => {
+import MyImage from "../../../assets/pilot/testy2.png"
+
+const ProjectList = ({ filter = "", ArtistLibrary }) => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const [projects, setProjects] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -59,29 +62,43 @@ const ProjectList = ({ message, filter = "", ArtistLibrary }) => {
             : null}
 
             <div className={`${Styles.ProjectListContainer}`}>
-                <div className={`${windowDimension === "bigDesktop" ? Styles.Responsive : null}`}>
+                <div className={`${windowDimension === "bigDesktop" ? Styles.Gallery : null}`}>
                     {projects.results.map((post) => (<>
-                    <InfiniteScroll
-                    dataLength={projects.results.length}
-                    next={() => fetchMoreData()}
-                    hasMore={!!projects.results.next}
-                    loader={<div>Loading...</div>}
-                    endMessage={null}
-                    >
-                        <div className={`${Styles.Frame} ${windowDimension === "bigDesktop" ? Styles.ResponsiveFrame : null}`}>
-                            {ArtistLibrary ? 
-                                <ProjectItem
-                                key={post.id} {...post}
-                                ArtistLibrary
-                                />
-                             : 
-                                <ProjectItem
-                                key={post.id} {...post}
-                                />
-                            }
-                        </div>
-                    </InfiniteScroll>
-                </>))}
+
+                        <InfiniteScroll
+                        dataLength={projects.results.length}
+                        next={() => fetchMoreData()}
+                        hasMore={!!projects.results.next}
+                        loader={<p>Loading...</p>}
+                        endMessage={null}
+                        >
+                            <div>
+                                {ArtistLibrary ? (<>
+
+                                    <ProjectItem
+                                    key={post.id} {...post}
+                                    ArtistLibrary
+                                    />
+
+                                </>):(<>
+
+                                    {/*
+                                    <ProjectItem
+                                    key={post.id} {...post}
+                                    className={`${Styles.GridFrame} ${windowDimension === "bigDesktop" ? Styles.GridFrameBig : null}`}
+                                    ArtistLibrary
+                                    />                                    
+                                    */}
+
+                                    <ProjectItem
+                                    key={post.id} {...post}
+                                    />                                    
+
+                                </>)}
+                            </div>
+                        </InfiniteScroll>
+
+                    </>))}
                 </div>
             </div>
         </AnimatedContainer>
