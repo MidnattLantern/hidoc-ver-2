@@ -66,7 +66,7 @@ const ProjectList = ({ message, filter = "", ArtistLibrary }) => {
                     next={() => fetchMoreData()}
                     hasMore={!!projects.results.next}
                     loader={<div>Loading...</div>}
-                    endMessage={<div>No more items</div>}
+                    endMessage={null}
                     >
                         <div className={`${Styles.Frame} ${windowDimension === "bigDesktop" ? Styles.ResponsiveFrame : null}`}>
                             {ArtistLibrary ? 

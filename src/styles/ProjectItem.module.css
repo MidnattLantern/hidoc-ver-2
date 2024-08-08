@@ -30,6 +30,7 @@
     border-radius: 3px;
     pointer-events: none; /* Protect downloading (unless they screenshot :P ) */
     border: 2px solid var(--edge);
+    box-shadow: 0 2px 10px var(--void-shade);
 }
 .FeaturePosterDetail{
     max-height: 650px;

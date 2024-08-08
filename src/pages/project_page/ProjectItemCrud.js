@@ -1,11 +1,14 @@
 import React, { useRef, useState, useContext } from "react";
+import { axiosReq } from "../../api/axiosDefaults";
+import { Form, Image } from "react-bootstrap";
+import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 //styles
 import Styles from "../../styles/ProjectItemCrud.module.css";
 import "../../global.css";
-import { Form, Image } from "react-bootstrap";
-import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
 
 const ProjectItemCrud = () => {
+    const history = useHistory();
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const [errors, setErrors] = useState({});
     const posterInput = useRef(null);
@@ -38,8 +41,32 @@ const ProjectItemCrud = () => {
         }
     };
 
+    const handleDiscard = () => {
+        history.goBack()
+    };
+
+    const handleSubmit = async (userInput) => {
+        userInput.preventDefault();
+        const formData = new FormData();
+
+        formData.append('project_title', project_title);
+        formData.append('project_description', project_description);
+        formData.append('feature_poster', posterInput.current.files[0]);
+        formData.append('deployed_link', deployed_link);
+
+        try {
+            const {data} = await axiosReq.post('/projects/', formData);
+            history.push(`/artist/detail/${data.id}`);
+        } catch(err){
+
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+            }
+        }
+    };
+
     return(<div className={`${Styles.ProjectItemCrudContainer}`}>
-        <Form onSubmit={(event) => {event.preventDefault()}}>
+        <Form onSubmit={handleSubmit}>
         
             <div className={Styles.DetailContainer}>
                 <Form.Group>
@@ -91,13 +118,13 @@ const ProjectItemCrud = () => {
 
                 <div className={Styles.Description}>
                     <div className={Styles.SaveDiscardButtonContainer}>
-                        {project_title !== "" ? (<>
-                            <button onClick={(event) => {event.preventDefault()}} className={Styles.SaveDiscardButton}>Save</button>
+                        {project_title !== "" && feature_poster !== "" ? (<>
+                            <button type={"submit"} className={Styles.SaveDiscardButton}>Save</button>
                         </>): (<>
                             <div className={`${Styles.DisabledButton}`}>Save</div>
                         </>)}
                         
-                        <button onClick={(event) => {event.preventDefault()}} className={Styles.SaveDiscardButton}>Discard</button>
+                        <button onClick={handleDiscard} className={Styles.SaveDiscardButton}>Discard</button>
                     </div>
 
                     <hr/>

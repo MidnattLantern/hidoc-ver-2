@@ -32,9 +32,10 @@ const ArtistHeader = () => {
     return(<div className={Styles.ArtistHeaderContainer}>
         <h1>{artistData?.owner}</h1>
         <p>projects: {artistData?.projects_count}</p>
-        {(currentUser?.pk.toString()) === id ?
-            <button onClick={handleRedirectToCreate}>Create project</button>
-        :
+        {(currentUser?.pk.toString()) === id ? (<div className={Styles.AlignButtons}>
+            <button className={Styles.ArtistHeaderButton} onClick={handleRedirectToCreate}>+ Create project</button>
+            <button className={Styles.ArtistHeaderButton}>Edit profile</button>
+            </div>):
             <p>watch artist</p>
         }
     </div>)
