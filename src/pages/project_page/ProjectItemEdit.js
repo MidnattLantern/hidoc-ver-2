@@ -1,75 +1,33 @@
-import React, { useRef, useState, useContext } from "react";
-import { axiosReq } from "../../api/axiosDefaults";
+import React, { useContext, useRef, useState } from "react";
+import { useCurrentUser } from "../../contexts/currentUserContext";
 import { Form, Image } from "react-bootstrap";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-//styles
-import Styles from "../../styles/ProjectItemCrud.module.css";
+// styles
+import Styles from "../../styles/ProjectItemEdit.module.css";
 import "../../global.css";
 
-const ProjectItemCrud = () => {
-    const history = useHistory();
-    const { windowDimension } = useContext(ResponsiveWindowContext);
-    const [errors, setErrors] = useState({});
-    const posterInput = useRef(null);
-    const [projectData, setProjectData] = useState({
-        project_title: "",
-        project_description: "",
-        feature_poster: "",
-        deployed_link: "",
-    });
+
+const ProjectItemEdit = ({ ...props }) => {
     const {
+        id,
+        owner,
         project_title,
         project_description,
         feature_poster,
         deployed_link,
-    } = projectData;
+        ProjectDetail,
+        ArtistLibrary,
+    } = props;
+    const currentUser = useCurrentUser
+    const { windowDimension } = useContext(ResponsiveWindowContext);
 
-    const handleStringInput = (userInput) => {
-        setProjectData({
-            ...projectData,
-            [userInput.target.name]: userInput.target.value,
-        });
-    };
-    const handleChangeFeaturePoster = (userInput) => {
-        if (userInput.target.files.length){
-            URL.revokeObjectURL(feature_poster);
-            setProjectData({
-                ...projectData,
-                feature_poster: URL.createObjectURL(userInput.target.files[0]),
-            });
-        }
-    };
+    const [errors, setErrors] = useState({});
+    const posterInput = useRef(null);
 
-    const handleDiscard = (event) => {
-        event.preventDefault(); // without this, the project would've been created when clicking discard
-        history.goBack();
-    };
-
-    const handleSubmit = async (userInput) => {
-        userInput.preventDefault();
-        const formData = new FormData();
-
-        formData.append('project_title', project_title);
-        formData.append('project_description', project_description);
-        formData.append('feature_poster', posterInput.current.files[0]);
-        formData.append('deployed_link', deployed_link);
-
-        try {
-            const {data} = await axiosReq.post('/projects/', formData);
-            history.push(`/artist/detail/${data.id}`);
-        } catch(err){
-
-            if (err.response?.status !== 401) {
-                setErrors(err.response?.data);
-            }
-        }
-    };
-
-    return(<div className={`${Styles.ProjectItemCrudContainer}`}>
-        <Form onSubmit={handleSubmit}>
-        
-            <div className={Styles.DetailContainer}>
+    return(<div className={Styles.ProjectItemEditContainer}>
+        <Form>
+            
+        <div className={Styles.DetailContainer}>
                 <Form.Group>
                     <Form.Control
                     className={`${Styles.FormControl} ${Styles.TitleFormControl}`}
@@ -77,14 +35,13 @@ const ProjectItemCrud = () => {
                     name={"project_title"}
                     placeholder={"Project title (optional)"}
                     value={project_title}
-                    onChange={handleStringInput}
+                    onChange={() => {}}
                     />
                     {errors?.project_title?.map((message, idx) => (
                     <p key={idx}>
                         {message}
                     </p>
-            ))}
-
+                    ))}
                 </Form.Group>
 
                 <Form.Group>
@@ -100,12 +57,11 @@ const ProjectItemCrud = () => {
                         </>) : (<>
                             <p className={Styles.NoFeaturePoster}>File must be smaller than 1MB</p>
                         </>)}
-
                         <Form.File
                         className={Styles.FormFileButton}
                         id="image-upload"
                         accept="image/*"
-                        onChange={handleChangeFeaturePoster}
+                        onChange={() => {}}
                         ref={posterInput}
                         />
 
@@ -125,7 +81,7 @@ const ProjectItemCrud = () => {
                             <div className={`${Styles.DisabledButton}`}>Save</div>
                         </>)}
                         
-                        <button onClick={handleDiscard} className={Styles.SaveDiscardButton}>Discard</button>
+                        <button onClick={() => {}} className={Styles.SaveDiscardButton}>Discard</button>
                     </div>
 
                     <hr/>
@@ -138,7 +94,7 @@ const ProjectItemCrud = () => {
                         placeholder={"Project description (optional)"}
                         rows={3}
                         value={project_description}
-                        onChange={handleStringInput}
+                        onChange={() => {}}
                         />
                     </Form.Group>
                     {errors?.project_description?.map((message, idx) => (
@@ -155,7 +111,7 @@ const ProjectItemCrud = () => {
                         name={"deployed_link"}
                         placeholder={"Deployed link URL (optional)"}
                         value={deployed_link}
-                        onChange={handleStringInput}
+                        onChange={() => {}}
                         />
                     </Form.Group>
                     {errors?.deployed_link?.map((message, idx) => (
@@ -164,10 +120,9 @@ const ProjectItemCrud = () => {
                         </p>
                     ))}
                 </div>
-
             </div>
         </Form>
     </div>)
 };
 
-export default ProjectItemCrud;
+export default ProjectItemEdit;

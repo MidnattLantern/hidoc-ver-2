@@ -36,7 +36,7 @@ const ArtistHeader = () => {
             <button className={Styles.ArtistHeaderButton} onClick={handleRedirectToCreate}>+ Create project</button>
             <button className={Styles.ArtistHeaderButton}>Edit profile</button>
             </div>):
-            <p>watch artist</p>
+            <button className={Styles.ArtistHeaderButton}>Watch artist</button>
         }
     </div>)
 };

@@ -7,7 +7,8 @@ import "../../global.css";
 // components
 import ProjectList from "./crud/ProjectList";
 import ProjectDetail from "./crud/ProjectDetail";
-import ProjectDetailCrud from "./crud/ProjectDetailCrud";
+import ProjectDetailCreate from "./crud/ProjectDetailCreate";
+import ProjectDetailEdit from "./crud/ProjectDetailEdit";
 
 const ProjectPage = () => {
     const history = useHistory();
@@ -22,7 +23,9 @@ const ProjectPage = () => {
             case 'detail':
                 return <ProjectDetail />;
             case 'create':
-                return <ProjectDetailCrud />;
+                return <ProjectDetailCreate />;
+            case 'edit':
+                return <ProjectDetailEdit />;
             default: // "broken link" by default
                 return <div className={Styles.BrokenLinkMessage}>
                     <h1>Broken link</h1>

@@ -5,6 +5,7 @@ import "../../global.css";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
+import { useCurrentUser } from "../../contexts/currentUserContext";
 
 const ProjectItem = ({ ...props }) => {
     const {
@@ -15,9 +16,9 @@ const ProjectItem = ({ ...props }) => {
         feature_poster,
         deployed_link,
         ProjectDetail,
-        IsOwner,
         ArtistLibrary,
     } = props;
+    const currentUser = useCurrentUser();
 
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const library = ArtistLibrary ? "artist" : "browse";
@@ -29,9 +30,23 @@ const ProjectItem = ({ ...props }) => {
                     <h1 className={Styles.Title}>
                         {project_title}
                     </h1>
+
                     <Card.Img src={feature_poster} className={`${Styles.FeaturePoster} ${Styles.FeaturePosterDetail}`}/>
                     <div className={Styles.Description}>
-                        {IsOwner ? <button className={Styles.EditButton}>Edit {project_title} </button> : <p>Artist: {owner}</p>}
+
+                    <Link to={`/artist/list/${owner}`}>
+                        <p>Artist: {owner}</p>
+                    </Link>
+
+                        {currentUser?.username === owner ? (<>
+                            <Link to={`/project/edit/${id}`} className={Styles.EditButton}>
+                            Update {project_title}
+                            </Link>
+                        </>) : (<>
+                            <div className={Styles.EditButton}>
+                            Watch {project_title}
+                            </div>
+                        </>)}
 
                         {project_description !== "" ? (<>
                             <hr/>

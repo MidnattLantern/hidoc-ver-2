@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ResponsiveWindowContext } from "../../../contexts/responsiveWindowContext";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useCurrentUser } from "../../../contexts/currentUserContext";
+import { axiosReq } from "../../../api/axiosDefaults";
 // Styles
 import Styles from "../../../styles/ProjectDetail.module.css";
 import "../../../global.css";
 // components
 import ProjectItem from "../ProjectItem";
-import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { useCurrentUser } from "../../../contexts/currentUserContext";
-import { axiosReq } from "../../../api/axiosDefaults";
 
 const ProjectDetail = () => {
     const { id } = useParams();
@@ -18,7 +18,7 @@ const ProjectDetail = () => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
 
     const handleRedirectToBrowse = () => {
-        history.goBack(); // less robust, could crash in rare cases
+        history.goBack();
     }
 
     useEffect(() => {
