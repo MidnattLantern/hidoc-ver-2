@@ -20,10 +20,27 @@
     }
 }
 
+.AlignViewsForSmall{
+    display: flex;
+    flex-direction: column;
+}
+.AlignViewsForBigDesktop{
+    display: flex;
+    flex-direction: row;
+}
+
 .NoFeaturePoster{
     margin-top: 20px;
     pointer-events: none;
     color: var(--theme);
+}
+
+.FeaturePosterView{
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    border: 2px solid var(--edge);
+    border-radius: 3px;
 }
 
 .FeaturePoster{
@@ -31,13 +48,12 @@
     height: auto;
     border-radius: 3px;
     pointer-events: all; /* set to none to disable interaction */
-    border: 2px solid var(--edge);
+    /*border: 2px solid var(--edge);*/
     cursor: default;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
 }
 .FeaturePosterDetail{
     max-height: 650px;
@@ -92,13 +108,21 @@
     animation: pulse 3.0s infinite;
 }
 
-.Description{
+.DescriptionView{
     border: 2px solid var(--edge);
+    border-radius: 3px;
     background-color: var(--void);
     color: var(--white);
     padding: 15px;
     cursor: default;
+    margin-top: 25px;
 }
+
+.DescriptionViewBigDesktop{
+    margin-left: 25px;
+    margin-top: 0px;
+}
+
 .DeployedLink{
     color: var(--theme);
     text-decoration: none;

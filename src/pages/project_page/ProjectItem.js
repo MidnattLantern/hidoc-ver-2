@@ -27,7 +27,7 @@ const ProjectItem = ({ ...props }) => {
 
             {ProjectDetail ? (<div className={`${ windowDimension === "bigDesktop" ? Styles.AlignViewsForBigDesktop : Styles.AlignViewsForSmall}`}>
 
-                <div className={Styles.HeaderAndImageView}>
+                <div className={Styles.FeaturePosterView}>
                     <Card.Img src={feature_poster} className={`${Styles.FeaturePoster} ${Styles.FeaturePosterDetail}`}/>
                 </div>
 
