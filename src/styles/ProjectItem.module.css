@@ -21,12 +21,23 @@
 
 .Title{
     cursor: default;
+    font-size: 40px;
+}
+
+.AlignViewsForSmall{
+    display: flex;
+    flex-direction: column;
+}
+.AlignViewsForBigDesktop{
+    display: flex;
+    flex-direction: row;
 }
 
 .FeaturePoster{
     width: 100%;
     height: auto;
     pointer-events: none; /* Protect downloading (unless they screenshot :P ) */
+    border-radius: 3px;
 }
 .FeaturePosterDetail{
     max-height: 650px;
@@ -58,28 +69,31 @@
     animation: pulse 3.0s infinite;
 }
 
-.Description{
+
+.DescriptionView{
     border: 2px solid var(--edge);
+    border-radius: 3px;
     background-color: var(--void);
     color: var(--white);
     padding: 15px;
     cursor: default;
+    min-width: 300px;
 }
+.DescriptionViewBigDesktop{
+    margin-left: 25px;
+}
+
 .DeployedLink{
-    width: 100%;
-    padding: 10px;
-}
-.Anchor{
     color: var(--theme);
     text-decoration: none;
 }
-.Anchor:hover{
+.DeployedLink:hover{
     text-decoration: underline;
 }
 
-.UpdateButton,
-.WatchButton{
+.EditButton{
     border: 2px solid var(--edge);
+    border-radius: 2px;
     background-color: var(--void);
     padding: 7px;
     display: flex;
@@ -90,165 +104,24 @@
     box-shadow: 0 2px 10px var(--void-shade);
     transition: color 0.15s ease;
     cursor: pointer;
-    width: 100%;
 }
-.UpdateButton:hover,
-.WatchButton:hover{
+.EditButton:hover{
     color: var(--theme);
     background-color: var(--void-shade);
     transition: color 0.15s ease;
 }
 
-/* test */
 .GridFrame{
     width: 275px;
     height: 275px;
     border: 1.5px solid var(--edge);
     border-radius: 2px;
     overflow: hidden;
-
+    box-shadow: 0 2px 10px var(--void-shade);
     margin: 15px;
     object-fit: cover; /* ensure any image dimension doesn't distort or leave empty space */
 }
 .GridFrameBig{
     width: 300px;
     height: 300px;
-}
-
-/* alternative sttyles*/
-
-.NoFeaturePoster{
-    margin-top: 20px;
-    pointer-events: none;
-    color: var(--theme);
-}
-
-.FeaturePoster{
-    width: 100%;
-    height: auto;
-    border-radius: 3px;
-    pointer-events: all; /* set to none to disable interaction */
-    /*border: 2px solid var(--edge);*/
-    cursor: default;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.FeaturePosterDetail{
-    max-height: 650px;
-}
-.ImageSizeForDesktop{
-    max-height: 500px;
-    max-width: 1000px;
-    transition: max-width 0.5s ease;
-}
-.ImageSizeForSmall{
-    max-height: 500px;
-    max-width: 335px;
-    transition: max-width 0.5s ease;
-}
-
-.FormFileButton{
-    margin: 10px;
-    color: var(--grey);
-    background-color: var(--void);
-
-    border: 2px solid var(--edge);
-    border-radius: 2px;
-    padding: 10px;
-    max-width: 325px; /* files with long names could interupt the UI */
-    overflow: hidden; /* files with long names could interupt the UI */
-}
-.FormFileButton:hover{
-    background-color: var(--void-shade);
-    transition: color 0.15s ease;
-    color: var(--theme);
-}
-
-.Watermark {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgba(0, 0, 0, 0);
-    padding: 10px;
-    font-size: 24px;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0) 40%);
-    transition: color 0.0s ease-in-out, background-image 0.0s ease-in-out;
-    cursor: pointer;
-    border-radius: 3px;
-}
-
-.Watermark:hover {
-    color: var(--white);
-    background-image: linear-gradient(to bottom, var(--edge) 0%, rgba(0, 0, 0, 0) 40%);
-    animation: pulse 3.0s infinite;
-}
-
-.Description{
-    border: 2px solid var(--edge);
-    background-color: var(--void);
-    color: var(--white);
-    padding: 15px;
-    cursor: default;
-}
-
-.SaveDiscardButton{
-    border: 2px solid var(--edge);
-    background-color: var(--void);
-    padding: 7px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: var(--white);
-
-    transition: color 0.15s ease;
-    width: 125px;
-}
-.SaveDiscardButton:hover{
-    color: var(--theme);
-    background-color: var(--void-shade);
-    transition: color 0.15s ease;
-}
-.DisabledButton{
-    border: 2px solid var(--edge);
-    background-color: var(--void);
-    padding: 7px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: var(--grey);
-
-    transition: color 0.15s ease;
-    width: 125px;
-    cursor: default;
-}
-.SaveDiscardButtonContainer{
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-}
-
-/* form control*/
-.FormControl,
-.FormControl:focus{
-    background-color: var(--void);
-    border: 2px solid var(--edge);
-    border-radius: 2px;
-    color: var(--white);
-    cursor: default;
-    box-shadow: none;
-}
-.FormControl::placeholder {
-    color: var(--grey);
-}
-.TitleFormControl{
-    margin-bottom: 15px;
-    font-size: 30px;
 }

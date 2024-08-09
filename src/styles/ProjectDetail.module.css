@@ -17,6 +17,8 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
     margin-bottom: 150px;
+    justify-content: center;
+    align-items: end;
 }
 .ProjectDetailContainer::-webkit-scrollbar {
     display: none; /* Chrome, Safari, and Opera */
