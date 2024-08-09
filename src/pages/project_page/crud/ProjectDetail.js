@@ -38,27 +38,16 @@ const ProjectDetail = () => {
     }, [id]);
 
 // AlignForPhone: Moving Go Back button to the bottom for phone view
-    return (<div className={`
-    ${Styles.ProjectDetailContainer}
-    `}>
-        <div className={`
-                ${hasLoaded ? Styles.Reveal : Styles.Withhold}
-            `}>
-                <button
-                onClick={handleRedirectToBrowse}
-                className={`
-                    ${Styles.BackToBrowseButton}
-                    ${windowDimension === "phone" ? Styles.BackToBrowseButton_AlignForPhone: Styles.BackToBrowseButton_AlignForAnyDesktop}
-                `}
-                >Go back</button>
-
-                {currentUser ? <div className={Styles.OwnerOptions}>
-                <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>
-                </div> :
-                <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>
-                }
-            </div>
-
+    return (<div className={`${Styles.ProjectDetailContainer}`}>
+        <div className={`${hasLoaded ? Styles.Reveal : Styles.Withhold}`}>
+            <button
+            onClick={handleRedirectToBrowse}
+            className={`${Styles.BackToBrowseButton} ${windowDimension === "phone" ? Styles.BackToBrowseButton_AlignForPhone: Styles.BackToBrowseButton_AlignForAnyDesktop}`}
+            >
+                Go back
+            </button>
+            <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>
+        </div>
     </div>)
 };
 

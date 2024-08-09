@@ -1,0 +1,109 @@
+.ProjectItemContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    position: relative; /* ensure targeting the item you click */
+    justify-content: center;
+}
+
+/* Special logic */
+@keyframes pulse {
+    0% {
+        color: var(--white);
+    }
+    50% {
+        color: var(--theme);
+    }
+    100% {
+        color: var(--white);
+    }
+}
+
+.Title{
+    cursor: default;
+}
+
+.FeaturePoster{
+    width: 100%;
+    height: auto;
+    pointer-events: none; /* Protect downloading (unless they screenshot :P ) */
+}
+.FeaturePosterDetail{
+    max-height: 650px;
+}
+
+.Watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 275px;
+    height: 275px;
+    transform: translate(-50%, -50%);
+    color: rgba(0, 0, 0, 0);
+    padding: 10px;
+    font-size: 24px;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0) 40%);
+    transition: color 0.0s ease-in-out, background-image 0.0s ease-in-out;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.WatermarkBig {
+    width: 300px;
+    height: 300px;
+}
+
+.Watermark:hover {
+    color: var(--white);
+    background-image: linear-gradient(to bottom, var(--edge) 0%, rgba(0, 0, 0, 0) 40%);
+    animation: pulse 3.0s infinite;
+}
+
+.Description{
+    border: 2px solid var(--edge);
+    background-color: var(--void);
+    color: var(--white);
+    padding: 15px;
+    cursor: default;
+}
+.DeployedLink{
+    color: var(--theme);
+    text-decoration: none;
+}
+.DeployedLink:hover{
+    text-decoration: underline;
+}
+
+.EditButton{
+    border: 2px solid var(--edge);
+    background-color: var(--void);
+    padding: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white);
+    box-shadow: 0 2px 10px var(--void-shade);
+    transition: color 0.15s ease;
+    cursor: pointer;
+}
+.EditButton:hover{
+    color: var(--theme);
+    background-color: var(--void-shade);
+    transition: color 0.15s ease;
+}
+
+/* test */
+.GridFrame{
+    width: 275px;
+    height: 275px;
+    border: 1.5px solid var(--edge);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px var(--void-shade);
+    margin: 15px;
+    object-fit: cover; /* ensure any image dimension doesn't distort or leave empty space */
+}
+.GridFrameBig{
+    width: 300px;
+    height: 300px;
+}

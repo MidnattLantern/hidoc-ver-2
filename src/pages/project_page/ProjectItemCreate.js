@@ -127,7 +127,7 @@ const ProjectItemCreate = () => {
                         <button onClick={handleDiscard} className={Styles.SaveDiscardButton}>Discard</button>
                     </div>
 
-                    <hr/>
+                    <br/>
                     <Form.Group>
                         <Form.Control
                         type={"text"}
@@ -146,7 +146,7 @@ const ProjectItemCreate = () => {
                         </p>
                     ))}
                     
-                    <hr/>
+                    <br/>
                     <Form.Group>
                         <Form.Control
                         className={`${Styles.FormControl}`}

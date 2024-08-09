@@ -27,7 +27,7 @@ const ProjectItemEdit = ({ ...props }) => {
     return(<div className={Styles.ProjectItemEditContainer}>
         <Form>
             
-        <div className={Styles.DetailContainer}>
+            <div className={Styles.DetailContainer}>
                 <Form.Group>
                     <Form.Control
                     className={`${Styles.FormControl} ${Styles.TitleFormControl}`}
@@ -84,7 +84,7 @@ const ProjectItemEdit = ({ ...props }) => {
                         <button onClick={() => {}} className={Styles.SaveDiscardButton}>Discard</button>
                     </div>
 
-                    <hr/>
+                    <br/>
                     <Form.Group>
                         <Form.Control
                         type={"text"}
@@ -103,7 +103,7 @@ const ProjectItemEdit = ({ ...props }) => {
                         </p>
                     ))}
                     
-                    <hr/>
+                    <br/>
                     <Form.Group>
                         <Form.Control
                         className={`${Styles.FormControl}`}
