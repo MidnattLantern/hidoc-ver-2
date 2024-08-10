@@ -194,3 +194,40 @@
     margin-bottom: 15px;
     font-size: 30px;
 }
+
+.PseudoDeleteButton{
+    border: 2px solid var(--edge);
+    background-color: var(--void);
+    padding: 7px;
+    margin: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white);
+    box-shadow: 0 2px 10px var(--void-shade);
+    transition: color 0.15s ease;
+}
+
+.AlignDeleteButton{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+.DeleteButton{
+    border: 2px solid rgb(200,0,0);
+    background-color: var(--void);
+    padding: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white);
+    box-shadow: 0 2px 10px var(--void-shade);
+    transition: color 0.15s ease;
+}
+.DeleteButton:hover{
+    color: rgb(200,0,0);
+    transition: color 0.15s ease;
+    background-color: rgb(0,0,0);
+}

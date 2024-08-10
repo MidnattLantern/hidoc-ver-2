@@ -15,6 +15,7 @@ const ProjectItemEdit = () => {
     const currentUser = useCurrentUser();
     const [errors, setErrors] = useState({});
     const posterInput = useRef(null);
+    const [deleteButton, revealDeleteButton] = useState(false);
 
     const [projectData, setProjectData] = useState({
         project_title: "",
@@ -78,10 +79,15 @@ const ProjectItemEdit = () => {
         history.goBack();
     };
 
+    const handleRevealDeleteButton = (event) => {
+        event.preventDefault();
+        revealDeleteButton(prevState => !prevState);
+    };
+
     const handleDelete = async (event) => {
         try{
             event.preventDefault();
-            await axiosReq.delete(`/projects/${id}`)
+//            await axiosReq.delete(`/projects/${id}`)
             history.push(`/artist/list/${currentUser?.pk}`)
         } catch(err) {
 
@@ -205,13 +211,16 @@ const ProjectItemEdit = () => {
                             {message}
                         </p>
                     ))}
+<hr/>
+<div className={Styles.AlignDeleteButton}>
+    <button className={Styles.SaveDiscardButton} onClick={handleRevealDeleteButton}>Delete {project_title}</button>
+    {deleteButton ? (<>
+        <button className={Styles.DeleteButton} onClick={handleDelete}>Confirm</button>
+    </>) : (<>
 
-<p>feature_poster: {feature_poster !== "" ? <>{feature_poster}</> : <>empty</>}</p>
-<p>posterInput.length: {posterInput.current?.files.length}</p>
-<p>posterInput: {posterInput.current?.files ? 'true' : 'false'}</p>
-<p>posterInput advanced: {posterInput.current && posterInput.current.files.length > 0 ? 'true' : 'false'}</p>
-<p>user: {currentUser?.pk}</p>
-<button onClick={handleDelete}>delete</button>
+    </>)}
+</div>
+
 
                 </div>
             </div>
