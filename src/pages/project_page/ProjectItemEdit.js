@@ -78,6 +78,16 @@ const ProjectItemEdit = () => {
         history.goBack();
     };
 
+    const handleDelete = async (event) => {
+        try{
+            event.preventDefault();
+            await axiosReq.delete(`/projects/${id}`)
+            history.push(`/artist/list/${currentUser?.pk}`)
+        } catch(err) {
+
+        }
+    }
+
     useEffect(() => {
         const handleMount = async () => {
             try{
@@ -200,6 +210,8 @@ const ProjectItemEdit = () => {
 <p>posterInput.length: {posterInput.current?.files.length}</p>
 <p>posterInput: {posterInput.current?.files ? 'true' : 'false'}</p>
 <p>posterInput advanced: {posterInput.current && posterInput.current.files.length > 0 ? 'true' : 'false'}</p>
+<p>user: {currentUser?.pk}</p>
+<button onClick={handleDelete}>delete</button>
 
                 </div>
             </div>
