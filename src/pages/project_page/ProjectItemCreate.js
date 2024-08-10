@@ -12,6 +12,7 @@ const ProjectItemCreate = () => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const [errors, setErrors] = useState({});
     const posterInput = useRef(null);
+    const testy2 = useRef(null);
     const [projectData, setProjectData] = useState({
         project_title: "",
         project_description: "",
@@ -32,13 +33,13 @@ const ProjectItemCreate = () => {
         });
     };
     const handleChangeFeaturePoster = (userInput) => {
-        if (userInput.target.files.length){
+        if (userInput.target.files.length) {
             URL.revokeObjectURL(feature_poster);
             setProjectData({
                 ...projectData,
                 feature_poster: URL.createObjectURL(userInput.target.files[0]),
             });
-        }
+        };
     };
 
     const handleDiscard = (event) => {
@@ -84,9 +85,9 @@ const ProjectItemCreate = () => {
                                 <p className={Styles.NoFeaturePoster}>File must be smaller than 1MB</p>
                             </>)}
 
-                            <Form.File
+                            <input
                             className={Styles.FormFileButton}
-                            id="image-upload"
+                            type="file"
                             accept="image/*"
                             onChange={handleChangeFeaturePoster}
                             ref={posterInput}
@@ -164,7 +165,13 @@ const ProjectItemCreate = () => {
                                 {message}
                             </p>
                         ))}
-                    </div>
+
+<p>feature_poster: {feature_poster !== "" ? <>{feature_poster}</> : <>empty</>}</p>
+<p>posterInput: {posterInput.current?.files ? 'true' : 'false'}</p>
+<p>posterInput advanced: {posterInput.current && posterInput.current.files.length > 0 ? 'true' : 'false'}</p>
+<p>testy2: {testy2.current?.files ? 'true' : 'false'}</p>
+
+                </div>
             </div>
         </Form>
     </div>)

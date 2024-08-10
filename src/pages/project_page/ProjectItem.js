@@ -56,7 +56,7 @@ const ProjectItem = ({ ...props }) => {
                     </>) : null }
                     {deployed_link !== "" ? (<>
                         <hr/>
-                        <p>deployed link: <a className={Styles.DeployedLink}target="blank_" href={deployed_link}>{deployed_link}</a> </p>
+                        <a className={Styles.DeployedLink}target="blank_" href={deployed_link}>{deployed_link}</a>
                     </>) : null }
 
 
