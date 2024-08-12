@@ -12,7 +12,6 @@ const ProjectItemCreate = () => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const [errors, setErrors] = useState({});
     const posterInput = useRef(null);
-    const testy2 = useRef(null);
     const [projectData, setProjectData] = useState({
         project_title: "",
         project_description: "",
@@ -165,11 +164,6 @@ const ProjectItemCreate = () => {
                                 {message}
                             </p>
                         ))}
-
-<p>feature_poster: {feature_poster !== "" ? <>{feature_poster}</> : <>empty</>}</p>
-<p>posterInput: {posterInput.current?.files ? 'true' : 'false'}</p>
-<p>posterInput advanced: {posterInput.current && posterInput.current.files.length > 0 ? 'true' : 'false'}</p>
-<p>testy2: {testy2.current?.files ? 'true' : 'false'}</p>
 
                 </div>
             </div>

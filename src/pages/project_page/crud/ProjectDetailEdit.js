@@ -5,7 +5,6 @@ import "../../../global.css";
 // components
 import ProjectItemEdit from "../ProjectItemEdit";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { useCurrentUser } from "../../../contexts/currentUserContext";
 import { ResponsiveWindowContext } from "../../../contexts/responsiveWindowContext";
 import { axiosReq } from "../../../api/axiosDefaults";
 
@@ -13,7 +12,6 @@ const ProjectDetailEdit = () => {
     const { id } = useParams();
     const [project, setProject] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
-    const currentUser = useCurrentUser();
     const history = useHistory();
     const { windowDimension } = useContext(ResponsiveWindowContext);
 
@@ -42,4 +40,4 @@ const ProjectDetailEdit = () => {
     </div>)
 };
 
-export default ProjectDetailEdit;
+//export default ProjectDetailEdit;

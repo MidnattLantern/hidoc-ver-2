@@ -6,11 +6,9 @@ import "../../../global.css";
 // components
 import ProjectItemCreate from "../ProjectItemCreate";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useCurrentUser } from "../../../contexts/currentUserContext";
 
 const ProjectDetailCreate = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
-    const currentUser = useCurrentUser();
     const history = useHistory();
     const { windowDimension } = useContext(ResponsiveWindowContext);
 
@@ -37,4 +35,4 @@ const ProjectDetailCreate = () => {
     </div>)
 };
 
-export default ProjectDetailCreate;
+//export default ProjectDetailCreate;

@@ -6,7 +6,7 @@ import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
 // components
 import ProjectList from "./crud/ProjectList";
-import ProjectDetail from "./crud/ProjectDetail";
+import ProjectDetailFrame from "./crud/ProjectDetailFrame";
 
 const ArtistPage = () => {
     const history = useHistory();
@@ -19,7 +19,7 @@ const ArtistPage = () => {
             case 'list':
                 return <ProjectList ArtistLibrary/>;
             case 'detail':
-                return <ProjectDetail />;
+                return <ProjectDetailFrame />;
             default: // "broken link" by default
                 return <div className={Styles.BrokenLinkMessage}>
                     <h1>Broken link</h1>

@@ -6,31 +6,17 @@ import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
 // components
 import ProjectList from "./crud/ProjectList";
-import ProjectDetail from "./crud/ProjectDetail";
-import ProjectDetailCreate from "./crud/ProjectDetailCreate";
-import ProjectDetailEdit from "./crud/ProjectDetailEdit";
+import ProjectDetailFrame from "./crud/ProjectDetailFrame";
 
 const ProjectPage = () => {
     const history = useHistory();
-    const handleRedirectToBrowse = () => {
-        history.push('/browse/list/_')
-    }
     const { action } = useParams();
     const renderAction = (action) => {
         switch (action) {
             case 'list':
                 return <ProjectList />;
-            case 'detail':
-                return <ProjectDetail />;
-            case 'create':
-                return <ProjectDetailCreate />;
-            case 'edit':
-                return <ProjectDetailEdit />;
-            default: // "broken link" by default
-                return <div className={Styles.BrokenLinkMessage}>
-                    <h1>Broken link</h1>
-                    <button onClick={handleRedirectToBrowse}>Back to Browse</button>
-                </div>
+            default:
+                return <ProjectDetailFrame />
         };
     };
 

@@ -36,9 +36,7 @@ const ProjectItem = ({ ...props }) => {
                 <div className={`${Styles.DescriptionView} ${windowDimension === "bigDesktop" ? Styles.DescriptionViewBigDesktop : null}`}>
                     <h1 className={Styles.Title}> {project_title} </h1>
 
-                    <Link to={`/artist/list/${owner}`}>
-                        <p>Artist: {owner}</p>
-                    </Link>
+                    <p>Artist: {owner}</p>
 
                     {currentUser?.username === owner ? (<>
                         <Link to={`/project/edit/${id}`} className={Styles.EditButton}>
