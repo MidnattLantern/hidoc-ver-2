@@ -87,7 +87,7 @@ const ProjectItemEdit = () => {
     const handleDelete = async (event) => {
         try{
             event.preventDefault();
-//            await axiosReq.delete(`/projects/${id}`)
+            await axiosReq.delete(`/projects/${id}`)
             history.push(`/artist/list/${currentUser?.pk}`)
         } catch(err) {
 
