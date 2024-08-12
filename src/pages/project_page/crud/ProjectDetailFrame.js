@@ -8,6 +8,7 @@ import "../../../global.css";
 import ProjectItem from "../ProjectItem";
 import ProjectItemCreate from "../ProjectItemCreate";
 import ProjectItemEdit from "../ProjectItemEdit";
+import ProjectItemCrud from "../ProjectItemCrud";
 // components
 
 const ProjectDetailFrame = () => {
@@ -48,9 +49,9 @@ const ProjectDetailFrame = () => {
             case 'detail':
                 return <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>;
             case 'create':
-                return <ProjectItemCreate />;
+                return <ProjectItemCrud />;
             case 'edit':
-                return <ProjectItemEdit {...project.results[0]}/>;
+                return <ProjectItemCrud {...project.results[0]} EditMode/>;
             default: // "broken link" by default
                 return null
         };

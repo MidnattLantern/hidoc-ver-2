@@ -8,7 +8,7 @@ import "../../global.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-const ProjectItemEdit = () => {
+const ProjectItemCrud = ({ EditMode }) => {
     const history = useHistory();
     const {id} = useParams();
     const currentUser = useCurrentUser();
@@ -64,8 +64,14 @@ const ProjectItemEdit = () => {
         formData.append("deployed_link", deployed_link);
 
         try {
-            await axiosReq.put(`/projects/${id}`, formData);
-            history.push(`/artist/detail/${id}`)
+            if (EditMode) { // edit mode 
+                await axiosReq.put(`/projects/${id}`, formData)
+                history.push(`/artist/detail/${id}`)
+            } else { // create mode
+                const {data} = await axiosReq.post('/projects/', formData)
+                history.push(`/artist/detail/${data.id}`)
+            }
+            
         } catch(err) {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
@@ -108,8 +114,13 @@ const ProjectItemEdit = () => {
 
             }
         }
-        handleMount();
-    }, [id, currentUser, history]);
+        if (EditMode) {
+            handleMount();
+        } else {
+
+        }
+
+    }, [id, currentUser, history, EditMode]);
 
     const { windowDimension } = useContext(ResponsiveWindowContext);
 
@@ -211,15 +222,20 @@ const ProjectItemEdit = () => {
                         </p>
                     ))}
 
-<hr/>
-<div className={Styles.AlignDeleteButton}>
-    <button className={Styles.SaveDiscardButton} onClick={handleRevealDeleteButton}>Delete {project_title}</button>
-    {deleteButton ? (<>
-        <button className={Styles.DeleteButton} onClick={handleDelete}>Confirm</button>
-    </>) : (<>
+{EditMode ? (<>
+    <hr/>
+    <div className={Styles.AlignDeleteButton}>
+        <button className={Styles.SaveDiscardButton} onClick={handleRevealDeleteButton}>Delete {project_title}</button>
+        {deleteButton ? (<>
+            <button className={Styles.DeleteButton} onClick={handleDelete}>Confirm</button>
+        </>) : (<>
 
-    </>)}
-</div>
+        </>)}
+    </div>
+</>) : (<>
+
+</>)}
+
 
                 </div>
             </div>
@@ -227,4 +243,4 @@ const ProjectItemEdit = () => {
     </div>)
 };
 
-export default ProjectItemEdit;
+export default ProjectItemCrud;
