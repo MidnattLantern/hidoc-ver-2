@@ -1,19 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import { axiosReq } from "../../../api/axiosDefaults";
+import { axiosReq } from "../../api/axiosDefaults";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { fetchMoreData } from "../../../utils/utils";
-import { useCurrentUser } from "../../../contexts/currentUserContext";
-import AnimatedContainer from "../../../components/AnimatedContainer";
+import { fetchMoreData } from "../../utils/utils";
+import { useCurrentUser } from "../../contexts/currentUserContext";
+import AnimatedContainer from "../../components/AnimatedContainer";
 // styles
-import Styles from "../../../styles/ProjectList.module.css";
-import "../../../global.css";
+import Styles from "../../styles/ProjectList.module.css";
+import "../../global.css";
 //components
-import ProjectItem from "../ProjectItem";
-import ArtistHeader from "../ArtistHeader";
-import { ResponsiveWindowContext } from "../../../contexts/responsiveWindowContext";
+import ProjectItem from "./ProjectItem";
+import ArtistHeader from "./ArtistHeader";
+import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-const ProjectList = ({ filter = "", ArtistLibrary }) => {
+const ProjectList = ({ filter = "", ArtistLibrary, WatchListLibrary }) => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const [projects, setProjects] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -48,7 +48,17 @@ const ProjectList = ({ filter = "", ArtistLibrary }) => {
                 } catch(err) {
 
                 }
-            } else {
+            } else if (WatchListLibrary) { // for watch list page
+                try { // for artist page
+                    const {data} = await axiosReq.get(`/projects/?watching_project__owner__artaccount=${currentUser?.pk}&owner__artaccount=`);
+                    setProjects(data);
+                    setNextPage(data.next !== null); // in place of InfiniteScroll
+                    setPreviousPage(data.previous !== null); // in place of InfiniteScroll
+                    setHasLoaded(true)
+                } catch(err) {
+
+                }
+            }else {
                 try { // browse page by default
                     const { data } = await axiosReq.get(`/projects/?page=${page}`);
                     setProjects(data);

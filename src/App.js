@@ -16,6 +16,7 @@ import "./global.css";
 // components
 import ProjectPage from "./pages/project_page/ProjectPage";
 import ArtistPage from "./pages/project_page/ArtistPage";
+import WatchListPage from "./pages/project_page/WatchListPage";
 
 function App() {
   const { windowDimension, windowTooShort } = useContext(ResponsiveWindowContext);
@@ -43,6 +44,7 @@ function App() {
               <Route exact path="/browse/:action/:id" render={() => <ProjectPage />} />
               <Route exact path="/artist/:action/:id" render={() => <ArtistPage />} />
               <Route exact path="/project/:action/:id" render={() => <ProjectPage />} />
+              <Route exact path="/watch-list/:action/:id" render={() => <WatchListPage />} />
 
               <Route exact path="/piloting" render={() => <Piloting />} />
 

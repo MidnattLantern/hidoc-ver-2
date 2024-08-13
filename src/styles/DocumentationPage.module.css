@@ -1,0 +1,61 @@
+.DocumentationPageContainer{
+    border: 2px solid var(--edge);
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    overflow: scroll;
+}
+
+.DocumentationFrame{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 300px;
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Special logic */
+@keyframes pulse {
+    0% {
+        background-color: var(--void);
+    }
+    50% {
+        background-color: var(--void-shade);
+    }
+    100% {
+        background-color: var(--void);
+    }
+}
+
+.DocumentationImage{
+    width: 240px;
+    height: 240px;
+    border: 1px solid blue;
+}
+
+.CreateEditButton{
+    width: 240px;
+    height: 40px;
+    margin-top: 5px;
+
+    border: 2px solid var(--edge);
+    padding: 7px;
+    margin: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white);
+    box-shadow: 0 2px 10px var(--void-shade);
+    transition: color 0.15s ease;
+    background-color: var(--void);
+}
+.CreateEditButton:hover {
+    color: var(--theme);
+    transition: color 0.15s ease;
+    animation: pulse 2.0s infinite;
+}

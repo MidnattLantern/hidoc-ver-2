@@ -5,8 +5,8 @@ import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min
 import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
 // components
-import ProjectList from "./crud/ProjectList";
-import ProjectDetailFrame from "./crud/ProjectDetailFrame";
+import ProjectList from "./ProjectList";
+import ProjectDetail from "./ProjectDetail";
 
 const ProjectPage = () => {
     const history = useHistory();
@@ -14,9 +14,9 @@ const ProjectPage = () => {
     const renderAction = (action) => {
         switch (action) {
             case 'list':
-                return <ProjectList />;
+                return <ProjectList />
             default:
-                return <ProjectDetailFrame />
+                return <ProjectDetail />
         };
     };
 

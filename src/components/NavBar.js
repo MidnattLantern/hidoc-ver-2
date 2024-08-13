@@ -37,7 +37,7 @@ const NavBar = () => {
 
         <NavLink className={`
         ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
-        `} exact activeClassName={Styles.Active} to={`/watch-list/`}>
+        `} exact activeClassName={Styles.Active} to={`/watch-list/list/_`}>
             Watch List
         </NavLink>
 
@@ -46,7 +46,6 @@ const NavBar = () => {
         `} exact activeClassName={Styles.Active} to="/signout/">
             Sign out
         </NavLink>
-
     </>
 
     return ( <>

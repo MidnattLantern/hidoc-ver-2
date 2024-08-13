@@ -1,17 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ResponsiveWindowContext } from "../../../contexts/responsiveWindowContext";
+import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { axiosReq } from "../../../api/axiosDefaults";
+import { axiosReq } from "../../api/axiosDefaults";
 // Styles
-import Styles from "../../../styles/ProjectDetail.module.css";
-import "../../../global.css";
-import ProjectItem from "../ProjectItem";
-import ProjectItemCreate from "../ProjectItemCreate";
-import ProjectItemEdit from "../ProjectItemEdit";
-import ProjectItemCrud from "../ProjectItemCrud";
+import Styles from "../../styles/ProjectDetail.module.css";
+import "../../global.css";
 // components
+import ProjectItem from "./ProjectItem";
+import ProjectItemCrud from "./ProjectItemCrud";
 
-const ProjectDetailFrame = () => {
+const ProjectDetail = () => {
     const { id } = useParams();
     const [project, setProject] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -47,7 +45,7 @@ const ProjectDetailFrame = () => {
     const renderAction = (action) => {
         switch (action) {
             case 'detail':
-                return <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>;
+                return <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>;     
             case 'create':
                 return <ProjectItemCrud />;
             case 'edit':
@@ -81,14 +79,10 @@ const ProjectDetailFrame = () => {
             </button>
 
             <div className={getClassName()}>
-
-                <p>frame</p>
-
                 {renderAction(action)}
             </div>
-            
         </div>
     </div>)
 };
 
-export default ProjectDetailFrame;
+export default ProjectDetail;

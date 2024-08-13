@@ -27,38 +27,35 @@ const ProjectItem = ({ ...props }) => {
 
             {ProjectDetail ? (<div className={`${ windowDimension === "bigDesktop" ? Styles.AlignViewsForBigDesktop : Styles.AlignViewsForSmall}`}>
 
-                <div className={Styles.FeaturePosterView}>
-                    <Card.Img src={feature_poster} className={`${Styles.FeaturePoster} ${Styles.FeaturePosterDetail}`}/>
-                </div>
-
-
-
-                <div className={`${Styles.DescriptionView} ${windowDimension === "bigDesktop" ? Styles.DescriptionViewBigDesktop : null}`}>
-                    <h1 className={Styles.Title}> {project_title} </h1>
-
-                    <p>Artist: {owner}</p>
-
-                    {currentUser?.username === owner ? (<>
-                        <Link to={`/project/edit/${id}`} className={Styles.EditButton}>
-                        Update {project_title}
-                        </Link>
-                    </>) : (<>
-                        <div className={Styles.EditButton}>
-                        Watch {project_title}
-                        </div>
-                    </>)}
-
-                    {project_description !== "" ? (<>
-                        <hr/>
-                        {project_description}
-                    </>) : null }
-                    {deployed_link !== "" ? (<>
-                        <hr/>
-                        <a className={Styles.DeployedLink}target="blank_" href={deployed_link}>{deployed_link}</a>
-                    </>) : null }
-
-
+            <div className={Styles.FeaturePosterView}>
+                <Card.Img src={feature_poster} className={`${Styles.FeaturePoster} ${Styles.FeaturePosterDetail}`}/>
             </div>
+
+            <div className={`${Styles.DescriptionView} ${windowDimension === "bigDesktop" ? Styles.DescriptionViewBigDesktop : null}`}>
+                <h1 className={Styles.Title}> {project_title} </h1>
+
+                <p>Artist: {owner}</p>
+
+                {currentUser?.username === owner ? (<>
+                    <Link to={`/project/edit/${id}`} className={Styles.EditButton}>
+                    Update {project_title}
+                    </Link>
+                </>) : (<>
+                    <div className={Styles.EditButton}>
+                    Watch {project_title}
+                    </div>
+                </>)}
+
+                {project_description !== "" ? (<>
+                    <hr/>
+                    {project_description}
+                </>) : null }
+                {deployed_link !== "" ? (<>
+                    <hr/>
+                    <a className={Styles.DeployedLink}target="blank_" href={deployed_link}>{deployed_link}</a>
+                </>) : null }
+            </div>
+
         </div>) : (<>
 
             <Link to={`/${library}/detail/${id}`}>
@@ -70,7 +67,7 @@ const ProjectItem = ({ ...props }) => {
             </Link>
 
         </>)}
-            
+
     </div>)
 };
 

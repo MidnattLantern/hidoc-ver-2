@@ -8,23 +8,15 @@ import "../../global.css";
 import ProjectList from "./ProjectList";
 import ProjectDetail from "./ProjectDetail";
 
-const ArtistPage = () => {
+const WatchListPage = () => {
     const history = useHistory();
-    const handleRedirectToBrowse = () => {
-        history.push('/browse/list/_')
-    }
     const { action } = useParams();
     const renderAction = (action) => {
         switch (action) {
             case 'list':
-                return <ProjectList ArtistLibrary/>;
-            case 'detail':
-                return <ProjectDetail />;
-            default: // "broken link" by default
-                return <div className={Styles.BrokenLinkMessage}>
-                    <h1>Broken link</h1>
-                    <button onClick={handleRedirectToBrowse}>Back to Browse</button>
-                </div>
+                return <ProjectList WatchListLibrary/>
+            default:
+                return <ProjectDetail />
         };
     };
 
@@ -51,4 +43,4 @@ const ArtistPage = () => {
     </>)
 };
 
-export default ArtistPage;
+export default WatchListPage;
