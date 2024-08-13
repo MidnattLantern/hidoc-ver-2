@@ -8,6 +8,7 @@ import "../../global.css";
 // components
 import ProjectItem from "./ProjectItem";
 import ProjectItemCrud from "./ProjectItemCrud";
+import DocumentationPage from "../documentation_page/DocumentationPage";
 
 const ProjectDetail = () => {
     const { id } = useParams();
@@ -45,7 +46,10 @@ const ProjectDetail = () => {
     const renderAction = (action) => {
         switch (action) {
             case 'detail':
-                return <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>;     
+                return <>
+                <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>;     
+                <DocumentationPage />
+                </>
             case 'create':
                 return <ProjectItemCrud />;
             case 'edit':

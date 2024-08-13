@@ -15,7 +15,9 @@ const ProjectPage = () => {
             case 'list':
                 return <ProjectList />
             default:
-                return <ProjectDetail />
+                return <>
+                <ProjectDetail />
+                </>
         };
     };
 

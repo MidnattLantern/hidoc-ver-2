@@ -64,23 +64,29 @@ const ProjectItem = ({ ...props }) => {
 
                 <p>Artist: {owner}</p>
 
-                {currentUser?.username === owner ? (<>
-                    <Link to={`/project/edit/${id}`} className={Styles.EditButton}>
-                    Update {project_title}
-                    </Link>
-                </>) : (<>
-                    
-                    {watch_proj_id ? (<>
-                        <button onClick={handleUnwatchProject} className={Styles.EditButton}>
-                        Unwatch {project_title}
-                        </button>                    
+                {currentUser ? (<>
+
+                    {currentUser?.username === owner ? (<>
+                        <Link to={`/project/edit/${id}`} className={Styles.EditButton}>
+                        Update {project_title}
+                        </Link>
                     </>) : (<>
-                        <button onClick={handleWatchProject} className={Styles.EditButton}>
-                        Watch {project_title}
-                        </button>
+                        
+                        {watch_proj_id ? (<>
+                            <button onClick={handleUnwatchProject} className={Styles.EditButton}>
+                            Unwatch {project_title}
+                            </button>                    
+                        </>) : (<>
+                            <button onClick={handleWatchProject} className={Styles.EditButton}>
+                            Watch {project_title}
+                            </button>
+                        </>)}
+
                     </>)}
 
-                </>)}
+                    </>) : (<>
+                        <p>Sign in to save {project_title} to a watch list</p>
+                    </>)}
 
                 {project_description !== "" ? (<>
                     <hr/>

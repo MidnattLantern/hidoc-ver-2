@@ -3,7 +3,9 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    overflow: hidden;
+    overflow-y: scroll; /* allow for documentations to appear when you scroll down */
+    overflow-x: hidden;
+    padding-top: 15px;
 }
 
 /* Special logic */

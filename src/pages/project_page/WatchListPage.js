@@ -15,7 +15,9 @@ const WatchListPage = () => {
             case 'list':
                 return <ProjectList WatchListLibrary/>
             default:
-                return <ProjectDetail />
+                return <>
+                <ProjectDetail />
+                </>
         };
     };
 

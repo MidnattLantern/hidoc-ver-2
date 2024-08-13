@@ -15,7 +15,9 @@ const ArtistPage = () => {
             case 'list':
                 return <ProjectList ArtistLibrary/>
             default:
-                return <ProjectDetail />
+                return <>
+                <ProjectDetail />
+                </>
         };
     };
 
