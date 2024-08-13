@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
-import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 // styles
 import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
@@ -9,22 +9,13 @@ import ProjectList from "./ProjectList";
 import ProjectDetail from "./ProjectDetail";
 
 const ArtistPage = () => {
-    const history = useHistory();
-    const handleRedirectToBrowse = () => {
-        history.push('/browse/list/_')
-    }
     const { action } = useParams();
     const renderAction = (action) => {
         switch (action) {
             case 'list':
-                return <ProjectList ArtistLibrary/>;
-            case 'detail':
-                return <ProjectDetail />;
-            default: // "broken link" by default
-                return <div className={Styles.BrokenLinkMessage}>
-                    <h1>Broken link</h1>
-                    <button onClick={handleRedirectToBrowse}>Back to Browse</button>
-                </div>
+                return <ProjectList ArtistLibrary/>
+            default:
+                return <ProjectDetail />
         };
     };
 

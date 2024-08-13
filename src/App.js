@@ -42,8 +42,8 @@ function App() {
               <Route exact path="/signout" render={() => <SignOutPage />} />
 
               <Route exact path="/browse/:action/:id" render={() => <ProjectPage />} />
-              <Route exact path="/artist/:action/:id" render={() => <ArtistPage />} />
               <Route exact path="/project/:action/:id" render={() => <ProjectPage />} />
+              <Route exact path="/artist/:action/:id" render={() => <ArtistPage />} />
               <Route exact path="/watch-list/:action/:id" render={() => <WatchListPage />} />
 
               <Route exact path="/piloting" render={() => <Piloting />} />

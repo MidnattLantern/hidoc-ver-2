@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
-import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 // styles
 import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
@@ -9,7 +9,6 @@ import ProjectList from "./ProjectList";
 import ProjectDetail from "./ProjectDetail";
 
 const ProjectPage = () => {
-    const history = useHistory();
     const { action } = useParams();
     const renderAction = (action) => {
         switch (action) {

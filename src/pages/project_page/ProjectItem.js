@@ -1,16 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 //styles
 import Styles from "../../styles/ProjectItem.module.css";
 import "../../global.css";
 import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
 import { useCurrentUser } from "../../contexts/currentUserContext";
+import { axiosRes } from "../../api/axiosDefaults";
 
 const ProjectItem = ({ ...props }) => {
     const {
         id,
         owner,
+        watch_proj_id,
         project_title,
         project_description,
         feature_poster,
@@ -18,10 +20,36 @@ const ProjectItem = ({ ...props }) => {
         ProjectDetail,
         ArtistLibrary,
     } = props;
-    const currentUser = useCurrentUser();
 
+    const history = useHistory();
+
+    const currentUser = useCurrentUser();
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const library = ArtistLibrary ? "artist" : "browse";
+
+    // logic
+    const handleWatchProject = async (event) => {
+        event.preventDefault();
+        try {
+            await axiosRes.post("/watch-projects/", {project: id});
+            history.goBack()
+        } catch(err) {
+
+        }
+    };
+    const handleUnwatchProject = async (event) => {
+        event.preventDefault();
+        try {
+            await axiosRes.delete(`/watch-projects/${watch_proj_id}`);
+            history.goBack()
+        } catch(err) {
+
+        }
+    };
+
+    useEffect(() => {
+
+    }, []);
 
     return(<div className={`${Styles.ProjectItemContainer}`}>
 
@@ -41,9 +69,17 @@ const ProjectItem = ({ ...props }) => {
                     Update {project_title}
                     </Link>
                 </>) : (<>
-                    <div className={Styles.EditButton}>
-                    Watch {project_title}
-                    </div>
+                    
+                    {watch_proj_id ? (<>
+                        <button onClick={handleUnwatchProject} className={Styles.EditButton}>
+                        Unwatch {project_title}
+                        </button>                    
+                    </>) : (<>
+                        <button onClick={handleWatchProject} className={Styles.EditButton}>
+                        Watch {project_title}
+                        </button>
+                    </>)}
+
                 </>)}
 
                 {project_description !== "" ? (<>

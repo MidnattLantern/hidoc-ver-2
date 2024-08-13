@@ -1,0 +1,1 @@
+HiDoc was firstly planned to merge ProjectPage, ArtistPage, and WatchListPage. But remained as seperate components, even though the logic is the same. This is because HiDoc wants a certain behaviour that required this approach.
