@@ -1,0 +1,2 @@
+From my education, I was taught to use as much routing as possible for editing or creating. Now that I've had time to learn things on my own, I prefer to use as little routing as neccessary. I use states as much as I can.
+HiDoc use states to differenciate actions such as detail or list, and routing for instance, when you want to share your project, you need the URL link to be specific. Here the routing is appropriate.
