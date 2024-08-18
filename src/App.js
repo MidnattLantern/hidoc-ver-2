@@ -17,7 +17,7 @@ import "./global.css";
 import ProjectPage from "./pages/project_page/ProjectPage";
 import ArtistPage from "./pages/project_page/ArtistPage";
 import WatchListPage from "./pages/project_page/WatchListPage";
-import DocumentationItemCrud from "./pages/documentation_page/DocumentationItemCrud";
+import ProjectPageDetail from "./pages/project_page/ProjectPageDetail";
 
 function App() {
   const { windowDimension, windowTooShort } = useContext(ResponsiveWindowContext);
@@ -42,10 +42,10 @@ function App() {
               <Route exact path="/signup" render={() => <SignUpForm />} />
               <Route exact path="/signout" render={() => <SignOutPage />} />
 
-              <Route exact path="/browse/:action/:id" render={() => <ProjectPage />} />
-              <Route exact path="/project/:action/:id" render={() => <ProjectPage />} />
-              <Route exact path="/artist/:action/:id" render={() => <ArtistPage />} />
-              <Route exact path="/watch-list/:action/:id" render={() => <WatchListPage />} />
+              <Route exact path="/browse" render={() => <ProjectPage />} />
+              <Route exact path="/artist/:id" render={() => <ArtistPage />} />
+              <Route exact path="/watch-list" render={() => <WatchListPage />} />
+              <Route exact path="/project/:id" render={() => <ProjectPageDetail />} />
 
               <Route exact path="/piloting" render={() => <Piloting />} />
 
@@ -60,3 +60,10 @@ function App() {
 };
 
 export default App;
+
+/*
+              <Route exact path="/browse/:action/:id" render={() => <ProjectPage />} />
+              <Route exact path="/artist/:action/:id" render={() => <ArtistPage />} />
+              <Route exact path="/watch-list/:action/:id" render={() => <WatchListPage />} />
+              <Route exact path="/project/:action/:id" render={() => <ProjectPage />} /
+*/

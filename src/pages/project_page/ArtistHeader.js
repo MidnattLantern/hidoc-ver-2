@@ -26,7 +26,7 @@ const ArtistHeader = () => {
     }, [id]);
 
     const handleRedirectToCreate = () => {
-        history.push("/project/create/_");
+        history.push("/project/create");
     }
 
     return(<div className={Styles.ArtistHeaderContainer}>

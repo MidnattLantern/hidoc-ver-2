@@ -1,25 +1,12 @@
 import React, { useContext } from "react";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 // styles
 import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
 // components
 import ProjectList from "./ProjectList";
-import ProjectDetail from "./ProjectDetail";
 
 const WatchListPage = () => {
-    const { action } = useParams();
-    const renderAction = (action) => {
-        switch (action) {
-            case 'list':
-                return <ProjectList WatchListLibrary/>
-            default:
-                return <>
-                <ProjectDetail />
-                </>
-        };
-    };
 
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const getClassName = () => {
@@ -38,7 +25,7 @@ const WatchListPage = () => {
     return(<>
         <div className={Styles.ProjectPageContainer}>
             <div className={getClassName()}>
-                {renderAction(action)}
+                <ProjectList WatchListLibrary/>
             </div>
         </div>
     </>)

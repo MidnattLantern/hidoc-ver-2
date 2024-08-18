@@ -16,7 +16,7 @@ const ProjectDetail = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const history = useHistory();
     const { windowDimension } = useContext(ResponsiveWindowContext);
-    const { action } = useParams();
+    const [action, setAction] = useState('detail'); // detail by default
 
     useEffect(() => {
         const handleMount = async () => { // read and update feature
@@ -31,6 +31,10 @@ const ProjectDetail = () => {
             }
         };
 
+        if (id === 'create') {
+            setAction('create')
+            handleMount();
+        }
         if (action !== 'create') {
             handleMount(); // read and update feature
         } else {
@@ -47,13 +51,13 @@ const ProjectDetail = () => {
         switch (action) {
             case 'detail':
                 return <>
-                <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>;     
+                <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail handleSetEdit={handleSetEdit} />;     
                 <DocumentationPage {...project.results[0]}/>
                 </>
             case 'create':
-                return <ProjectItemCrud />;
+                return <ProjectItemCrud handleSetEdit={handleSetEdit} handleSetDetail={handleSetDetail}/>;
             case 'edit':
-                return <ProjectItemCrud {...project.results[0]} EditMode/>;
+                return <ProjectItemCrud {...project.results[0]} EditMode handleSetEdit={handleSetEdit} handleSetDetail={handleSetDetail}/>;
             default: // "broken link" by default
                 return null
         };
@@ -72,6 +76,21 @@ const ProjectDetail = () => {
         };
     };
 
+    const handleSetDetail = ( ) => { // do not use event
+//        event.preventDefault();
+        setAction('detail');
+    };
+
+    const handleSetCreate = () => { // do not use event
+//        event.preventDefault();
+        setAction('create');
+    };
+
+    const handleSetEdit = ( ) => { // do not use event
+//        event.preventDefault();
+        setAction('edit');
+    }
+
 // AlignForPhone: Moving Go Back button to the bottom for phone view
     return (<div className={`${Styles.ProjectDetailContainer}`}>
 
@@ -82,6 +101,8 @@ const ProjectDetail = () => {
             >
                 Go back
             </button>
+
+            <p>action: {action}</p>
 
             <div className={getClassName()}>
                 {renderAction(action)}

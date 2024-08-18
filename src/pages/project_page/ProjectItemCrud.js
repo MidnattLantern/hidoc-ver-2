@@ -9,7 +9,7 @@ import Styles from "../../styles/ProjectItemEdit.module.css";
 import "../../global.css";
 
 
-const ProjectItemCrud = ({ EditMode }) => {
+const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
     const history = useHistory();
     const {id} = useParams();
     const currentUser = useCurrentUser();
@@ -66,11 +66,15 @@ const ProjectItemCrud = ({ EditMode }) => {
 
         try {
             if (EditMode) { // edit mode 
+//                await axiosReq.put(`/projects/${id}`, formData)
+//                history.push(`/artist/detail/${id}`)
                 await axiosReq.put(`/projects/${id}`, formData)
-                history.push(`/artist/detail/${id}`)
+                history.goBack();
             } else { // create mode
-                const {data} = await axiosReq.post('/projects/', formData)
-                history.push(`/artist/detail/${data.id}`)
+//                const {data} = await axiosReq.post('/projects/', formData)
+//                history.push(`/project/${data.id}`)
+                await axiosReq.post('/projects/', formData)
+                history.goBack();
             }
             
         } catch(err) {
@@ -94,7 +98,7 @@ const ProjectItemCrud = ({ EditMode }) => {
         try{
             event.preventDefault();
             await axiosReq.delete(`/projects/${id}`)
-            history.push(`/artist/list/${currentUser?.pk}`)
+            history.push(`/artist/${currentUser?.pk}`)
         } catch(err) {
 
         }

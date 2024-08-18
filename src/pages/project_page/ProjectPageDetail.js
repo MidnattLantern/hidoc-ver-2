@@ -4,9 +4,9 @@ import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext"
 import Styles from "../../styles/ProjectPage.module.css";
 import "../../global.css";
 // components
-import ProjectList from "./ProjectList";
+import ProjectDetail from "./ProjectDetail";
 
-const ProjectPage = () => {
+const ProjectPageDetail = () => {
 
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const getClassName = () => {
@@ -25,10 +25,10 @@ const ProjectPage = () => {
     return(<>
         <div className={Styles.ProjectPageContainer}>
             <div className={getClassName()}>
-                <ProjectList />
+                <ProjectDetail />
             </div>
         </div>
     </>)
 };
 
-export default ProjectPage;
+export default ProjectPageDetail;

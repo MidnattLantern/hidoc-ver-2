@@ -8,7 +8,7 @@ import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext"
 import { useCurrentUser } from "../../contexts/currentUserContext";
 import { axiosRes } from "../../api/axiosDefaults";
 
-const ProjectItem = ({ ...props }) => {
+const ProjectItem = ({handleSetEdit, ...props }) => {
     const {
         id,
         owner,
@@ -32,7 +32,7 @@ const ProjectItem = ({ ...props }) => {
         event.preventDefault();
         try {
             await axiosRes.post("/watch-projects/", {project: id});
-            history.goBack()
+            history.push("/watch-list")
         } catch(err) {
 
         }
@@ -41,7 +41,7 @@ const ProjectItem = ({ ...props }) => {
         event.preventDefault();
         try {
             await axiosRes.delete(`/watch-projects/${watch_proj_id}`);
-            history.goBack()
+            history.push("/watch-list")
         } catch(err) {
 
         }
@@ -50,6 +50,11 @@ const ProjectItem = ({ ...props }) => {
     useEffect(() => {
 
     }, []);
+
+    const handleTest = (event) => {
+        event.preventDefault();
+        handleSetEdit();
+    };
 
     return(<div className={`${Styles.ProjectItemContainer}`}>
 
@@ -67,9 +72,9 @@ const ProjectItem = ({ ...props }) => {
                 {currentUser ? (<>
 
                     {currentUser?.username === owner ? (<>
-                        <Link to={`/project/edit/${id}`} className={Styles.EditButton}>
-                        Update {project_title}
-                        </Link>
+
+                        <button className={Styles.EditButton} onClick={handleTest}>Update {project_title}</button>
+
                     </>) : (<>
                         
                         {watch_proj_id ? (<>
@@ -100,7 +105,7 @@ const ProjectItem = ({ ...props }) => {
 
         </div>) : (<>
 
-            <Link to={`/${library}/detail/${id}`}>
+            <Link to={`/project/${id}`}>
                 <div className={`${Styles.Watermark} ${windowDimension === "bigDesktop" ? Styles.WatermarkBig : null}`}>{project_title}</div>
                 <Card.Img
                     src={feature_poster}
