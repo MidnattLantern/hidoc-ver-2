@@ -14,10 +14,10 @@ import { ResponsiveWindowContext } from "./contexts/responsiveWindowContext";
 import Styles from "./App.module.css";
 import "./global.css";
 // components
-import ProjectPage from "./pages/project_page/ProjectPage";
+import BrowsePage from "./pages/project_page/BrowsePage";
 import ArtistPage from "./pages/project_page/ArtistPage";
 import WatchListPage from "./pages/project_page/WatchListPage";
-import ProjectPageDetail from "./pages/project_page/ProjectPageDetail";
+import ProjectPageDetail from "./pages/project_page/ProjectDetailPage";
 
 function App() {
   const { windowDimension, windowTooShort } = useContext(ResponsiveWindowContext);
@@ -42,7 +42,7 @@ function App() {
               <Route exact path="/signup" render={() => <SignUpForm />} />
               <Route exact path="/signout" render={() => <SignOutPage />} />
 
-              <Route exact path="/browse" render={() => <ProjectPage />} />
+              <Route exact path="/browse" render={() => <BrowsePage />} />
               <Route exact path="/artist/:id" render={() => <ArtistPage />} />
               <Route exact path="/watch-list" render={() => <WatchListPage />} />
               <Route exact path="/project/:id" render={() => <ProjectPageDetail />} />
@@ -60,10 +60,3 @@ function App() {
 };
 
 export default App;
-
-/*
-              <Route exact path="/browse/:action/:id" render={() => <ProjectPage />} />
-              <Route exact path="/artist/:action/:id" render={() => <ArtistPage />} />
-              <Route exact path="/watch-list/:action/:id" render={() => <WatchListPage />} />
-              <Route exact path="/project/:action/:id" render={() => <ProjectPage />} /
-*/

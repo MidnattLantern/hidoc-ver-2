@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
 // styles
-import Styles from "../../styles/ProjectPage.module.css";
+import Styles from "../../styles/BrowsePage.module.css";
 import "../../global.css";
 // components
 import ProjectList from "./ProjectList";

@@ -57,7 +57,7 @@ const ProjectDetail = () => {
             case 'create':
                 return <ProjectItemCrud handleSetEdit={handleSetEdit} handleSetDetail={handleSetDetail}/>;
             case 'edit':
-                return <ProjectItemCrud {...project.results[0]} EditMode handleSetEdit={handleSetEdit} handleSetDetail={handleSetDetail}/>;
+                return <ProjectItemCrud {...project.results[0]} EditMode handleSetDetail={handleSetDetail}/>;
             default: // "broken link" by default
                 return null
         };

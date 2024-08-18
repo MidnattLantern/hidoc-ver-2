@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
 // styles
-import Styles from "../../styles/ProjectPage.module.css";
+import Styles from "../../styles/BrowsePage.module.css";
 import "../../global.css";
 // components
-import ProjectDetail from "./ProjectDetail";
+import ProjectList from "./ProjectList";
 
-const ProjectPageDetail = () => {
+const BrowsePage = () => {
 
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const getClassName = () => {
@@ -25,10 +25,10 @@ const ProjectPageDetail = () => {
     return(<>
         <div className={Styles.ProjectPageContainer}>
             <div className={getClassName()}>
-                <ProjectDetail />
+                <ProjectList />
             </div>
         </div>
     </>)
 };
 
-export default ProjectPageDetail;
+export default BrowsePage;

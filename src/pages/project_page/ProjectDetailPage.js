@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
 // styles
-import Styles from "../../styles/ProjectPage.module.css";
+import Styles from "../../styles/BrowsePage.module.css";
 import "../../global.css";
 // components
-import ProjectList from "./ProjectList";
+import ProjectDetail from "./ProjectDetail";
 
-const ProjectPage = () => {
+const ProjectDetailPage = () => {
 
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const getClassName = () => {
-        switch (windowDimension) { // you can switch-case css classes like this
+        switch (windowDimension) {
             case "phone":
                 return Styles.ContainerForPhone;
             case "smallDesktop":
@@ -25,10 +25,10 @@ const ProjectPage = () => {
     return(<>
         <div className={Styles.ProjectPageContainer}>
             <div className={getClassName()}>
-                <ProjectList />
+                <ProjectDetail />
             </div>
         </div>
     </>)
 };
 
-export default ProjectPage;
+export default ProjectDetailPage;
