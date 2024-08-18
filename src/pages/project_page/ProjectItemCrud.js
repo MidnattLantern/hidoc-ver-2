@@ -67,8 +67,8 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
         try {
             if (EditMode) { // edit mode 
                 await axiosReq.put(`/projects/${id}`, formData)
-                history.goBack();
-            } else { // create mode
+                handleSetDetail();
+            } else { // create mode by default
                 await axiosReq.post('/projects/', formData)
                 history.goBack();
             }
@@ -82,7 +82,11 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
     
     const handleDiscard = (event) => {
         event.preventDefault(); // without this, the project would've been created when clicking discard
-        handleSetDetail();
+        if (EditMode) {
+            handleSetDetail();
+        } else { // if create mode (it's create by default) it should redirect instead
+            history.push(`/artist/${currentUser?.pk}`)
+        }
     };
 
     const handleRevealDeleteButton = (event) => {
