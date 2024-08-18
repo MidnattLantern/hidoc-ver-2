@@ -20,7 +20,7 @@ const ProjectDetail = () => {
 
     useEffect(() => {
         const handleMount = async () => { // read and update feature
-            try{
+            try {
                 const [{ data: project }] = await Promise.all([
                     axiosReq.get(`/projects/${id}`),
                 ]);
@@ -48,7 +48,7 @@ const ProjectDetail = () => {
             case 'detail':
                 return <>
                 <ProjectItem {...project.results[0]} setProjects={setProject} ProjectDetail/>;     
-                <DocumentationPage />
+                <DocumentationPage {...project.results[0]}/>
                 </>
             case 'create':
                 return <ProjectItemCrud />;
@@ -74,6 +74,7 @@ const ProjectDetail = () => {
 
 // AlignForPhone: Moving Go Back button to the bottom for phone view
     return (<div className={`${Styles.ProjectDetailContainer}`}>
+
         <div className={`${hasLoaded ? Styles.Reveal : Styles.Withhold}`}>
             <button
             onClick={handleGoBack}

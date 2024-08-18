@@ -58,7 +58,7 @@ const ProjectList = ({ filter = "", ArtistLibrary, WatchListLibrary }) => {
                 } catch(err) {
 
                 }
-            }else {
+            } else {
                 try { // browse page by default
                     const { data } = await axiosReq.get(`/projects/?page=${page}`);
                     setProjects(data);
@@ -78,7 +78,7 @@ const ProjectList = ({ filter = "", ArtistLibrary, WatchListLibrary }) => {
         return () => {
             clearTimeout(timer);
         };
-    }, [filter, query, currentUser, ArtistLibrary, id, page]);
+    }, [filter, query, currentUser, ArtistLibrary, id, page, WatchListLibrary]);
 
     return(<>
         <AnimatedContainer hasLoaded={hasLoaded}>

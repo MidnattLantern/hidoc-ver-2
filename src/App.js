@@ -17,6 +17,7 @@ import "./global.css";
 import ProjectPage from "./pages/project_page/ProjectPage";
 import ArtistPage from "./pages/project_page/ArtistPage";
 import WatchListPage from "./pages/project_page/WatchListPage";
+import DocumentationItemCrud from "./pages/documentation_page/DocumentationItemCrud";
 
 function App() {
   const { windowDimension, windowTooShort } = useContext(ResponsiveWindowContext);

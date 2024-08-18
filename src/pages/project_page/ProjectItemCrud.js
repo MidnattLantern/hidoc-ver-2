@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { useCurrentUser } from "../../contexts/currentUserContext";
 import { Form, Image } from "react-bootstrap";
 import { ResponsiveWindowContext } from "../../contexts/responsiveWindowContext";
+import { axiosReq } from "../../api/axiosDefaults";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 // styles
 import Styles from "../../styles/ProjectItemEdit.module.css";
 import "../../global.css";
-import { axiosReq } from "../../api/axiosDefaults";
-import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+
 
 const ProjectItemCrud = ({ EditMode }) => {
     const history = useHistory();
@@ -222,19 +223,19 @@ const ProjectItemCrud = ({ EditMode }) => {
                         </p>
                     ))}
 
-{EditMode ? (<>
-    <hr/>
-    <div className={Styles.AlignDeleteButton}>
-        <button className={Styles.SaveDiscardButton} onClick={handleRevealDeleteButton}>Delete {project_title}</button>
-        {deleteButton ? (<>
-            <button className={Styles.DeleteButton} onClick={handleDelete}>Confirm</button>
+        {EditMode ? (<>
+            <hr/>
+            <div className={Styles.AlignDeleteButton}>
+                <button className={Styles.SaveDiscardButton} onClick={handleRevealDeleteButton}>Delete {project_title}</button>
+                {deleteButton ? (<>
+                    <button className={Styles.DeleteButton} onClick={handleDelete}>Confirm</button>
+                </>) : (<>
+
+                </>)}
+            </div>
         </>) : (<>
 
         </>)}
-    </div>
-</>) : (<>
-
-</>)}
 
 
                 </div>
