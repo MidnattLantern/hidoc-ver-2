@@ -10,6 +10,7 @@ import "../../global.css";
 
 
 const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
+    const { windowDimension } = useContext(ResponsiveWindowContext);
     const history = useHistory();
     const {id} = useParams();
     const currentUser = useCurrentUser();
@@ -127,8 +128,6 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
 
     }, [id, currentUser, history, EditMode]);
 
-    const { windowDimension } = useContext(ResponsiveWindowContext);
-
     return(<div className={Styles.ProjectItemEditContainer}>
         <Form onSubmit={handleSubmit}>
             <div className={`${ windowDimension === "bigDesktop" ? Styles.AlignViewsForBigDesktop : Styles.AlignViewsForSmall}`}>
@@ -162,7 +161,6 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
                         </p>
                     ))}
                 </div>
-
 
                 <div className={`${Styles.DescriptionView} ${windowDimension === "bigDesktop" ? Styles.DescriptionViewBigDesktop : null}`}>
                     <Form.Group>
@@ -227,19 +225,19 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
                         </p>
                     ))}
 
-        {EditMode ? (<>
-            <hr/>
-            <div className={Styles.AlignDeleteButton}>
-                <button className={Styles.SaveDiscardButton} onClick={handleRevealDeleteButton}>Delete {project_title}</button>
-                {deleteButton ? (<>
-                    <button className={Styles.DeleteButton} onClick={handleDelete}>Confirm</button>
-                </>) : (<>
+                    {EditMode ? (<>
+                        <hr/>
+                        <div className={Styles.AlignDeleteButton}>
+                            <button className={Styles.SaveDiscardButton} onClick={handleRevealDeleteButton}>Delete {project_title}</button>
+                            {deleteButton ? (<>
+                                <button className={Styles.DeleteButton} onClick={handleDelete}>Confirm</button>
+                            </>) : (<>
 
-                </>)}
-            </div>
-        </>) : (<>
+                            </>)}
+                        </div>
+                    </>) : (<>
 
-        </>)}
+                    </>)}
 
 
                 </div>

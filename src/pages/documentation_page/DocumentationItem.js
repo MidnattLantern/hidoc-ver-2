@@ -6,7 +6,7 @@ import "../../global.css";
 const DocumentationItem = () => {
 
     return(<div className={Styles.DocumentationItemContainer}>
-        <h1>DocumentationItem Connected</h1>
+        <p>connected</p>
     </div>)
 };
 
