@@ -46,7 +46,8 @@ const SignInForm = () => {
             setCurrentUser(data.user)
             history.push("/");
         } catch(err) {
-            setErrors(err.response?.data);
+//            setErrors(err.response?.data);
+            console.log("authentication error")
         }
     };
 
