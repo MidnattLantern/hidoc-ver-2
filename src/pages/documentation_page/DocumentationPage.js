@@ -13,6 +13,8 @@ const DocumentationPage = ({ ...props }) => {
         owner,
     } = props;
 
+    const [selectedDocumentation, setSelectedDocumentation] = useState(null);
+
     const currentUser = useCurrentUser();
     const [action, setAction] = useState('list'); // detail by default
 
@@ -20,12 +22,12 @@ const DocumentationPage = ({ ...props }) => {
         event.preventDefault();
         setAction("create")
     };
-    const switchToList = (event) => {
-        event.preventDefault();
+    const switchToList = () => { // disabled event so that DocumentationItemCrud can work
+//        event.preventDefault();
         setAction("list")
     };
-    const switchToDetail = (event) => {
-        event.preventDefault();
+    const switchToDetail = () => { // disabled event so that DocumentationList can work
+//        event.preventDefault();
         setAction("detail")
     };
 
@@ -34,29 +36,18 @@ const DocumentationPage = ({ ...props }) => {
             case 'list':
                 return <>
 
-        {owner === currentUser?.username ? (<>
-            <div className={Styles.DocumentationFrame}>
-                <div className={Styles.DocumentationImage}>
-                    <DocumentationItemCrud ListView/>
+            {owner === currentUser?.username ? (<>
+                <div className={Styles.DocumentationFrame}>
+                    <div className={Styles.DocumentationImage}>
+                        <DocumentationItemCrud ListView/>
+                    </div>
+                    <button onClick={switchToCreate} className={Styles.CreateEditButton}>+ Create documentation</button>
                 </div>
-                <button onClick={switchToCreate} className={Styles.CreateEditButton}>+ Create documentation</button>
-            </div>
-        </>) : (<>
+            </>) : (<>
 
-        </>)}
+            </>)}
 
-            <div className={Styles.DocumentationFrame}>
-                <div className={Styles.DocumentationImage}>
-                    <DocumentationItemCrud ListView/>
-                </div>
-                {owner === currentUser?.username ? (<>
-                    <button onClick={switchToDetail} className={Styles.CreateEditButton}> Edit documentation</button>
-                </>) : (<>
-                    <button onClick={switchToDetail} className={Styles.CreateEditButton}> View documentation </button>
-                </>)}
-            </div>
-
-                    <DocumentationList />
+                    <DocumentationList owner={owner} switchToDetail={switchToDetail} setSelectedDocumentation={setSelectedDocumentation}/>
 
                 </>
             case 'create':
@@ -65,16 +56,16 @@ const DocumentationPage = ({ ...props }) => {
                 </>
             case 'detail':
                 return <>
-                    <button onClick={switchToList} className={Styles.CreateEditButton}>Discard</button>
+                    <button onClick={() => {switchToList(); setSelectedDocumentation(null);}} className={Styles.CreateEditButton}>Discard</button>
                     {owner === currentUser?.username ? <p>update</p> : <p>read only</p>}
 
                     <div className={Styles.DocumentationFrame}>
                         <div className={Styles.DocumentationImage}>
                             {owner === currentUser?.username ? 
-                            <DocumentationItemCrud EditMode/> :
-                            <DocumentationItemCrud ReadOnly/>}
+                            <DocumentationItemCrud EditMode selectedDocumentation={selectedDocumentation}/> :
+                            <DocumentationItemCrud ReadOnly selectedDocumentation={selectedDocumentation}/>}
                         </div>
-                    </div>                
+                    </div>
                     
                 </>
             default: // "broken link" by default
