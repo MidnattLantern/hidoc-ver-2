@@ -52,21 +52,15 @@ const DocumentationPage = ({ ...props }) => {
                 </>
             case 'create':
                 return <>
-                    <DocumentationItemCrud CreateMode switchToList={switchToList} />
+                    <DocumentationItemCrud CreateMode switchToList={switchToList}/>
                 </>
             case 'detail':
                 return <>
-                    <button onClick={() => {switchToList(); setSelectedDocumentation(null);}} className={Styles.CreateEditButton}>Discard</button>
-                    {owner === currentUser?.username ? <p>update</p> : <p>read only</p>}
 
-                    <div className={Styles.DocumentationFrame}>
-                        <div className={Styles.DocumentationImage}>
-                            {owner === currentUser?.username ? 
-                            <DocumentationItemCrud EditMode selectedDocumentation={selectedDocumentation}/> :
-                            <DocumentationItemCrud ReadOnly selectedDocumentation={selectedDocumentation}/>}
-                        </div>
-                    </div>
-                    
+                    {owner === currentUser?.username ? 
+                    <DocumentationItemCrud EditMode selectedDocumentation={selectedDocumentation} switchToList={switchToList}/> :
+                    <DocumentationItemCrud ReadOnly selectedDocumentation={selectedDocumentation} switchToList={switchToList}/>}
+
                 </>
             default: // "broken link" by default
                 return null

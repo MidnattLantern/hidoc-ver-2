@@ -43,7 +43,8 @@ const DocumentationItemCreate = ({switchToList}) => {
         }
     };
 
-    const handleSubmit = async () => { // event used to prevent default
+    const handleSubmit = async (event) => { // event used to prevent default
+        event.preventDefault();
         const formData = new FormData();
 
         formData.append("documentation_title", documentation_title);
@@ -52,13 +53,12 @@ const DocumentationItemCreate = ({switchToList}) => {
 
         if (imageInput?.current?.files[0]){
             formData.append("documentation_image", imageInput.current.files[0]);
-        }
+        };
 
         try {
-            await axiosReq.post('/documentations/', formData)
+            await axiosReq.post(`/documentations/`, formData)
             switchToList();
         } catch(err) {
-            console.log(err)
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             };
@@ -95,16 +95,7 @@ const DocumentationItemCreate = ({switchToList}) => {
                 </div>
 
                 <div className={`${Styles.DescriptionView} ${windowDimension === "bigDesktop" ? Styles.DescriptionViewBigDesktop : null}`}>
-                    <Form.Group>
-                        <Form.Control
-                            className={`${Styles.FormControl} ${Styles.TitleFormControl}`}
-                            type={"title"}
-                            name={"documentation_title"}
-                            placeholder={"Title (optional)"}
-                            value={documentation_title}
-                            onChange={handleStringInput}
-                        />
-                    </Form.Group>
+
 
                     <div className={Styles.SaveDiscardButtonContainer}>
                         {documentation_image !== "" ? (<>
