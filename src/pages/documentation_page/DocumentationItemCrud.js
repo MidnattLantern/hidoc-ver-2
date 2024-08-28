@@ -12,20 +12,20 @@ const DocumentationItemCrud = ({CreateMode, ReadOnly, EditMode, switchToList, se
 
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const imageInput = useRef(null);
-    const [editDocumentationData, setEditDocumentationData] = useState({
+    const [documentationData, setDocumentationData] = useState({
         documentation_paragraph: "",
         documentation_image: "",
     });
     const {
         documentation_paragraph,
         documentation_image,
-    } = editDocumentationData;
+    } = documentationData;
 
     useEffect(() => {
         const fetchDocumentation = async () => {
             try {
                 const {data} = await axiosReq.get(`/documentations/${selectedDocumentation}`);
-                setEditDocumentationData(data);
+                setDocumentationData(data);
             } catch(err) {
 
             }
@@ -34,8 +34,8 @@ const DocumentationItemCrud = ({CreateMode, ReadOnly, EditMode, switchToList, se
     }, [selectedDocumentation]);
 
     const handleStringInput = (userInput) => {
-        setEditDocumentationData({
-            ...editDocumentationData,
+        setDocumentationData({
+            ...documentationData,
             [userInput.target.name]: userInput.target.value,
         });
     };
@@ -43,23 +43,26 @@ const DocumentationItemCrud = ({CreateMode, ReadOnly, EditMode, switchToList, se
     const handleChangeDocumentationImage = (userInput) => {
         if (userInput.target.files.length){
             URL.revokeObjectURL(documentation_image);
-            setEditDocumentationData({
-                ...editDocumentationData,
+            setDocumentationData({
+                ...documentationData,
                 documentation_image: URL.createObjectURL(userInput.target.files[0]),
             });
-        };
+        }
     };
 
-    const handleSave = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
+        
         formData.append("documentation_paragraph", documentation_paragraph);
-        if (imageInput?.current?.files[0]){
-            formData.append("documentation_image", imageInput.current.files[0]);
-        };
+
+        if (imageInput?.current?.files[0]) {
+            formData.append('documentation_image', imageInput.current.files[0]);
+        }
+
 
         try {
-            await axiosReq.put(`/documentations/${selectedDocumentation}`, editDocumentationData)
+            await axiosReq.put(`/documentations/${selectedDocumentation}`, formData)
             switchToList();
         } catch(err) {
 
@@ -83,7 +86,7 @@ const DocumentationItemCrud = ({CreateMode, ReadOnly, EditMode, switchToList, se
 
         {EditMode ? (<>
         
-            <Form onSubmit={handleSave}>
+            <Form onSubmit={handleSubmit}>
             <div className={`${ windowDimension === "bigDesktop" ? Styles.AlignViewsForBigDesktop : Styles.AlignViewsForSmall}`}>
                 <div className={`${Styles.FeaturePosterView}`}>
 
