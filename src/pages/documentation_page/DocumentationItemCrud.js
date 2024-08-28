@@ -57,9 +57,6 @@ const DocumentationItemCrud = ({CreateMode, ReadOnly, EditMode, switchToList, se
         if (imageInput?.current?.files[0]){
             formData.append("documentation_image", imageInput.current.files[0]);
         };
-        if (event?.current?.files[0]){
-            formData.append("documentation_image", documentation_image.current.files[0]);
-        };
 
         try {
             await axiosReq.put(`/documentations/${selectedDocumentation}`, editDocumentationData)
