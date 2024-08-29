@@ -58,6 +58,9 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
         if (posterInput?.current?.files[0]) {
             formData.append('feature_poster', posterInput.current.files[0]);
         }
+        if (event?.current?.files[0]) { // testing if adding this will fix the CORS issue
+            formData.append('feature_poster', posterInput.current.files[0]);
+        }
 
         formData.append("deployed_link", deployed_link);
 
