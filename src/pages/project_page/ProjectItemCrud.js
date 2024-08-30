@@ -110,7 +110,7 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
                 const { data } = await axiosReq.get(`/projects/${id}`); // has to be { data } and nothing else!
                 const {project_title, project_description, feature_poster, deployed_link, is_owner} = data;
                 
-                is_owner ?(
+                is_owner ? (
                     setProjectData({project_title, project_description, feature_poster, deployed_link})
                 ) : (
                     console.log("is not owner")
