@@ -9,7 +9,7 @@ import Styles from "../../styles/ProjectItemEdit.module.css";
 import "../../global.css";
 
 
-const ProjectItemEdit = ({ handleSetDetail }) => {
+const ProjectItemEdit = () => {
     const { windowDimension } = useContext(ResponsiveWindowContext);
     const history = useHistory();
     const {id} = useParams();
@@ -66,7 +66,7 @@ const ProjectItemEdit = ({ handleSetDetail }) => {
 
         try {
             await axiosReq.put(`/projects/${id}`, formData)
-            handleSetDetail();
+            history.push(`/project/${id}`)
             
         } catch(err) {
             if (err.response?.status !== 401) {
@@ -77,7 +77,7 @@ const ProjectItemEdit = ({ handleSetDetail }) => {
     
     const handleDiscard = (event) => {
         event.preventDefault(); // without this, the project would've been created when clicking discard
-        handleSetDetail();
+        history.push(`/project/${id}`)
     };
 
     const handleRevealDeleteButton = (event) => {

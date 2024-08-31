@@ -8,7 +8,6 @@ import "../../global.css";
 // components
 import ProjectItem from "./ProjectItem";
 import ProjectItemCrud from "./ProjectItemCrud";
-import ProjectItemEdit from "./ProjectItemEdit";
 import DocumentationPage from "../documentation_page/DocumentationPage";
 
 const ProjectDetail = () => {
@@ -58,7 +57,7 @@ const ProjectDetail = () => {
             case 'create':
                 return <ProjectItemCrud handleSetEdit={handleSetEdit} handleSetDetail={handleSetDetail}/>;
             case 'edit':
-                return <ProjectItemEdit {...project.results[0]} EditMode handleSetDetail={handleSetDetail}/>;
+                return <ProjectItemCrud {...project.results[0]} EditMode handleSetDetail={handleSetDetail}/>;
             default: // "broken link" by default
                 return null
         };
@@ -89,7 +88,8 @@ const ProjectDetail = () => {
 
     const handleSetEdit = ( ) => { // do not use event
 //        event.preventDefault();
-        setAction('edit');
+//        setAction('edit');
+        history.push(`/edit/${id}`)
     }
 
 // AlignForPhone: Moving Go Back button to the bottom for phone view
