@@ -44,16 +44,18 @@ const DocumentationList = ({ owner, switchToDetail, setSelectedDocumentation}) =
             fetchDocumentations();
         }, [id, page]);
 
+        // unless the API can list recent to the left, it will have to be .reverse().map()
     return(<div className={Styles.DocumentationListContainer}>
 
-        {documentations.results.map((documentation) => (<>
+        {documentations.results.reverse().map((documentation) => (<>
 
             <div className={Styles.DocumentationFrame}>
-                <div className={Styles.DocumentationImage}>
+
                     <Card.Img
                     src={documentation.documentation_image}
+                    className={Styles.DocumentationImage}
                     />
-                </div>
+
                 {owner === currentUser?.username ? (<>
                     <button onClick={() => {setSelectedDocumentation(documentation.id); switchToDetail()}} className={Styles.CreateEditButton}> Edit documentation</button>
                 </>) : (<>
@@ -61,19 +63,21 @@ const DocumentationList = ({ owner, switchToDetail, setSelectedDocumentation}) =
                 </>)}
             </div>
         </>))}
+
             <div className={`${Styles.PageTurnContainer}`}>
                 {previousPage ? (<>
-                    <button className={`${Styles.PageTurnButton} ${Styles.PagePreviousExists}`} onClick={handleGetPrevious}>previous</button>
+                    <button className={`${Styles.PageTurnButton} ${Styles.PagePreviousExists}`} onClick={handleGetPrevious}> P </button>
                 </>) : (<>
-                    <button className={`${Styles.PageTurnButton}`} onClick={(event) => {event.preventDefault()}}>previous</button>
+                    <button className={`${Styles.PageTurnButton} ${Styles.PageTurnHidden}`} onClick={(event) => {event.preventDefault()}}> P </button>
                 </>)}
 
                 {nextPage ? (<>
-                    <button className={`${Styles.PageTurnButton} ${Styles.PageNextExists}`} onClick={handleGetNext}>next</button>
+                    <button className={`${Styles.PageTurnButton} ${Styles.PageNextExists}`} onClick={handleGetNext}> N </button>
                 </>) : (<>
-                    <button className={`${Styles.PageTurnButton}`} onClick={(event) => {event.preventDefault()}}>next</button>
+                    <button className={`${Styles.PageTurnButton} ${Styles.PageTurnHidden}`} onClick={(event) => {event.preventDefault()}}> N </button>
                 </>)}
             </div>
+
     </div>)
 };
 

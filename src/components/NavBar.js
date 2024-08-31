@@ -59,13 +59,6 @@ const NavBar = () => {
             ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
             `}
             exact activeClassName={Styles.Active} to="/">
-                Home
-            </NavLink>
-
-            <NavLink className={`
-            ${Styles.NavBarButton} ${windowDimension === "phone" ? Styles.ButtonForPhone : Styles.ButtonForDesktop}
-            `}
-            exact activeClassName={Styles.Active} to="/browse">
                 Browse
             </NavLink>
 
