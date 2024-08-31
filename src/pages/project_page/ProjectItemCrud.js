@@ -102,7 +102,7 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
         try {
             if (EditMode) {
                 await axiosReq.put(`/projects/${id}/`, formData);
-                history.push(`/project/${id}`);
+                handleSetDetail();
             } else {
                 await axiosReq.post('/projects/', formData)
                 history.goBack();

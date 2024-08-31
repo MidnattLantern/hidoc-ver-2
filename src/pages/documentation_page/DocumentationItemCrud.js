@@ -62,7 +62,7 @@ const DocumentationItemCrud = ({CreateMode, ReadOnly, EditMode, switchToList, se
 
 
         try {
-            await axiosReq.put(`/documentations/${selectedDocumentation}`, formData)
+            await axiosReq.put(`/documentations/${selectedDocumentation}/`, formData)
             switchToList();
         } catch(err) {
 
