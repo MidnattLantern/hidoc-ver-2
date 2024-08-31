@@ -38,6 +38,18 @@ const ProjectItemEdit = () => {
         });
     };
 
+/*
+    const handleChangeFeaturePoster = (userInput) => {
+        if (userInput.target.files.length){
+            URL.revokeObjectURL(feature_poster);
+            setProjectData({
+                ...projectData,
+                feature_poster: URL.createObjectURL(userInput.target.files[0]),
+            });
+        }
+    };
+*/
+
     const handleChangeFeaturePoster = (userInput) => {
         if (userInput.target.files.length){
             URL.revokeObjectURL(feature_poster);
@@ -48,6 +60,7 @@ const ProjectItemEdit = () => {
         }
     };
 
+/*
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
@@ -73,6 +86,36 @@ const ProjectItemEdit = () => {
                 setErrors(err.response?.data);
             };
         };
+    };
+*/
+
+    const handleSubmit = async (userInput) => {
+        userInput.preventDefault();
+        const formData = new FormData();
+
+        formData.append('project_title', project_title);
+        formData.append('project_description', project_description);
+
+        // unlike create, this additional code will prevent error message
+        if (posterInput?.current?.files[0]) {
+           formData.append('feature_poster', posterInput.current.files[0]);
+        }
+
+        formData.append('deployed_link', deployed_link);
+
+        if (userInput?.current?.files[0]){
+            formData.append('feature_poster', posterInput.current.files[0]);
+        }
+
+        try {
+            await axiosReq.put(`/projects/${id}/`, formData);
+            history.push(`/projects/${id}`);
+        } catch(err){
+
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+            }
+        }
     };
     
     const handleDiscard = (event) => {
