@@ -8,6 +8,7 @@ import "../../global.css";
 // components
 import ProjectItem from "./ProjectItem";
 import ProjectItemCrud from "./ProjectItemCrud";
+import ProjectItemEdit from "./ProjectItemEdit";
 import DocumentationPage from "../documentation_page/DocumentationPage";
 
 const ProjectDetail = () => {
@@ -57,7 +58,7 @@ const ProjectDetail = () => {
             case 'create':
                 return <ProjectItemCrud handleSetEdit={handleSetEdit} handleSetDetail={handleSetDetail}/>;
             case 'edit':
-                return <ProjectItemCrud {...project.results[0]} EditMode handleSetDetail={handleSetDetail}/>;
+                return <ProjectItemEdit {...project.results[0]} EditMode handleSetDetail={handleSetDetail}/>;
             default: // "broken link" by default
                 return null
         };
