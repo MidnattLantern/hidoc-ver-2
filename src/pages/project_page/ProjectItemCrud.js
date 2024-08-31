@@ -101,7 +101,7 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
 
         try {
             if (EditMode) {
-                await axiosReq.put(`/projects/${id}/`, formData);
+                await axiosReq.put(`/projects/${id}/`, formData); // important: include the tail /
                 handleSetDetail();
             } else {
                 await axiosReq.post('/projects/', formData)
@@ -133,7 +133,7 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
     const handleDelete = async (event) => {
         try{
             event.preventDefault();
-            await axiosReq.delete(`/projects/${id}`)
+            await axiosReq.delete(`/projects/${id}/`)
             history.push(`/artist/${currentUser?.pk}`)
         } catch(err) {
 

@@ -1,1 +1,3 @@
 Development is done locally, this can cause some unexpected errors out of your controll. Editing a project using Cloudinary is one of them. If no new image is provided in the image field, the app will delete the image. THIS ISN'T AN ISSUE FOR DEPLOYMENT.
+
+`await axiosReq.put(/projects/${id}/, formData)` In order to properly allow editing, ther must be a trailing /, otherwise there will be a CORS error

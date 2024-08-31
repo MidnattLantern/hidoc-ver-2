@@ -24,7 +24,7 @@ const DocumentationItemCrud = ({CreateMode, ReadOnly, EditMode, switchToList, se
     useEffect(() => {
         const fetchDocumentation = async () => {
             try {
-                const {data} = await axiosReq.get(`/documentations/${selectedDocumentation}`);
+                const {data} = await axiosReq.get(`/documentations/${selectedDocumentation}/`);
                 setDocumentationData(data);
             } catch(err) {
 
@@ -72,7 +72,7 @@ const DocumentationItemCrud = ({CreateMode, ReadOnly, EditMode, switchToList, se
     const handleDelete = async (event) => {
         event.preventDefault(); // important
         try{
-            await axiosReq.delete(`/documentations/${selectedDocumentation}`);
+            await axiosReq.delete(`/documentations/${selectedDocumentation}/`);
             switchToList();
         } catch(err) {
             console.log(err)

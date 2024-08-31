@@ -107,7 +107,7 @@ const ProjectItemEdit = () => {
         }
 
         try {
-            await axiosReq.put(`/projects/${id}/`, formData);
+            await axiosReq.put(`/projects/${id}/`, formData); // include the trailing /
             history.push(`/project/${id}`);
         } catch(err){
 
@@ -130,7 +130,7 @@ const ProjectItemEdit = () => {
     const handleDelete = async (event) => {
         try{
             event.preventDefault();
-            await axiosReq.delete(`/projects/${id}`)
+            await axiosReq.delete(`/projects/${id}/`)
             history.push(`/artist/${currentUser?.pk}`)
         } catch(err) {
 
@@ -140,7 +140,7 @@ const ProjectItemEdit = () => {
     useEffect(() => {
         const handleMount = async () => {
             try{
-                const { data } = await axiosReq.get(`/projects/${id}`); // has to be { data } and nothing else!
+                const { data } = await axiosReq.get(`/projects/${id}/`); // has to be { data } and nothing else!
                 const {project_title, project_description, feature_poster, deployed_link, is_owner} = data;
                 
                 is_owner ? (
