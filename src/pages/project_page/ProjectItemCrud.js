@@ -48,6 +48,7 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
         }
     };
 
+    /*
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
@@ -78,6 +79,41 @@ const ProjectItemCrud = ({ handleSetDetail, EditMode }) => {
                 setErrors(err.response?.data);
             };
         };
+    };
+    */
+
+    const handleSubmit = async (userInput) => {
+        userInput.preventDefault();
+        const formData = new FormData();
+
+        formData.append('project_title', project_title);
+        formData.append('project_description', project_description);
+
+        if (posterInput?.current?.files[0]) {
+           formData.append('feature_poster', posterInput.current.files[0]);
+        }
+
+        formData.append('deployed_link', deployed_link);
+
+        if (userInput?.current?.files[0]){
+            formData.append('feature_poster', posterInput.current.files[0]);
+        }
+
+        try {
+            if (EditMode) {
+                await axiosReq.put(`/projects/${id}/`, formData);
+                history.push(`/project/${id}`);
+            } else {
+                await axiosReq.post('/projects/', formData)
+                history.goBack();
+            }
+
+        } catch(err){
+
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+            }
+        }
     };
     
     const handleDiscard = (event) => {

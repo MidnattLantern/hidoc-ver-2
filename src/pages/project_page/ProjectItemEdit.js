@@ -96,7 +96,6 @@ const ProjectItemEdit = () => {
         formData.append('project_title', project_title);
         formData.append('project_description', project_description);
 
-        // unlike create, this additional code will prevent error message
         if (posterInput?.current?.files[0]) {
            formData.append('feature_poster', posterInput.current.files[0]);
         }
@@ -109,7 +108,7 @@ const ProjectItemEdit = () => {
 
         try {
             await axiosReq.put(`/projects/${id}/`, formData);
-            history.push(`/projects/${id}`);
+            history.push(`/project/${id}`);
         } catch(err){
 
             if (err.response?.status !== 401) {

@@ -88,8 +88,8 @@ const ProjectDetail = () => {
 
     const handleSetEdit = ( ) => { // do not use event
 //        event.preventDefault();
-//        setAction('edit');
-        history.push(`/edit/${id}`)
+        setAction('edit');
+//        history.push(`/edit/${id}`)
     }
 
 // AlignForPhone: Moving Go Back button to the bottom for phone view
